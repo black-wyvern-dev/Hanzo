@@ -17,20 +17,14 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SafeAreaView from 'react-native-safe-area-view';
 import { SocialIcon } from 'react-native-elements';
 import { Icon } from 'native-base';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
 
-import { useGlobals } from '../contexts/Global';
-
-const Drawer = createDrawerNavigator();
-
-const HomePage = ({navigation}) => {
+const SignUp = ({navigation}) => {
+   const [text, onChangeText] = React.useState(null);
   const [number, onChangeNumber] = React.useState(null);
-
+  const [check, onCheckChanged] = React.useState(false);
+  const onCheckToggled = () => {
+    onCheckChanged(!check);
+  };
   return (
     <SafeAreaView style={[styles.container]}>
       <StatusBar
@@ -39,150 +33,62 @@ const HomePage = ({navigation}) => {
         backgroundColor="#FFFFFF"
         translucent={true}
       />
-      <View style={[styles.inputContainer, {marginTop: 20}]}>
-        <Text>HomePage</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-          <Text style={[styles.content, styles.signUp]}>Log out</Text>
+      <View style={[styles.mainContainer]}>
+        <Text style={[styles.title]}>Sign Up</Text>
+        <View style={[styles.inputContainer, {marginBottom: 0}]}>
+          <Text style={[styles.label]}>Email</Text>
+          <TextInput
+            style={[styles.input]}
+            onChangeText={onChangeText}
+            placeholder="Your email address"
+            autoCompleteType="email"
+            value={text}
+          />
+        </View>
+        <View style={[styles.inputContainer, {marginTop: 0}]}>
+        <Text style={[styles.label]}>Password</Text>
+        <TextInput
+          style={[styles.input]}
+          onChangeText={onChangeNumber}
+          value={number}
+          secureTextEntry={true}
+            autoCompleteType="password"
+          placeholder=""
+        />
+        </View>
+        <View style={[styles.checkContainer]}>
+          <TouchableOpacity
+            onPress={onCheckToggled}
+          >
+            <Icon
+              name='done'
+              type='MaterialIcons'
+              style={[styles.checkBox, check?{}: styles.checkBoxActive]}
+            />
+          </TouchableOpacity>
+          <View style={[styles.checkTextContainer]}>
+            <Text style={[styles.content]}>I agree to the </Text>
+            <Text style={[styles.content, styles.link]}>Terms of Services</Text>
+            <Text style={[styles.content]}> and </Text>
+            <Text style={[styles.content, styles.link]}>Privacy Policy.</Text>
+          </View>
+        </View>
+        <TouchableOpacity
+          style={[styles.button, styles.signUpBtn, !check?{}: styles.signUpActive]}
+          disabled={!check}
+          onPress={() => navigation.navigate('SignUp')}>
+        <Text style={[styles.btnText]}>Continue</Text>
         </TouchableOpacity>
+        <View style={[styles.actionContainer]}>
+          <Text style={[styles.content]}>Have an Account?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+            <Text style={[styles.content, styles.signUp]}>Sign In</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
 };
-
-function CustomDrawerContent(props) {
-  const [{ userInfo }, dispatch] = useGlobals();
-
-  const [drawerItems, setDrawerItems] = React.useState([
-    {
-      drawerLabel: 'Home',
-      drawerIcon: 'home',
-      routeName: 'Home',
-      group: '',
-    },
-    {
-      drawerLabel: 'Ranking',
-      drawerIcon: 'assessment',
-      routeName: 'Home',
-      group: '',
-    },
-    {
-      drawerLabel: 'Customers',
-      drawerIcon: 'account-box',
-      routeName: 'Home',
-      group: '',
-    },
-    {
-      drawerLabel: 'Music',
-      drawerIcon: 'favorite',
-      routeName: 'Home',
-      group: '',
-    },
-    {
-      drawerLabel: 'Wallet',
-      drawerIcon: 'shopping-basket',
-      routeName: 'Home',
-      group: '',
-    },
-    {
-      drawerLabel: 'Game',
-      drawerIcon: 'videogame-asset',
-      routeName: 'Home',
-      group: '',
-    },
-    {
-      drawerLabel: 'Settings',
-      drawerIcon: 'settings',
-      routeName: 'Home',
-      group: '1',
-    },
-  ]);
-  const [drawerSelected, setDrawerSelected] = React.useState(0);
-  
-  const ItemHeader = ({item, index}) => {
-    const indexPosition = drawerItems.findIndex(
-      (obj) => obj.group === item.group,
-    );
-    if (indexPosition === index && item.group !== '') {
-      return <View style={styles.divider} />;
-    } else {
-      return <></>;
-    }
-  };
-
-  return (
-    <DrawerContentScrollView {...props}>
-      <View style={styles.containerHeader}>
-        <Icon
-          name={'close'}
-          type='MaterialIcons'
-          style={styles.drawerCloseIcon}
-        />
-        <Image
-          source={{uri: 'https://picsum.photos/200/200'}}
-          style={styles.imageProfile}
-        />
-        <Text style={styles.textName}>{userInfo.firstName+' '+userInfo.lastName}</Text>
-        <Text numberOfLines={1} style={styles.textEmail}>
-          {userInfo.email}
-        </Text>
-      </View>
-      {/* <DrawerItemList {...props} /> */}
-      <View style={styles.containerContent}>
-        <FlatList 
-          data={drawerItems}
-          keyExtractor={(item, index) => String(index + JSON.stringify(item))}
-          renderItem={({item, index}) => (
-            <View>
-              <ItemHeader item={item} index={index} />
-              <View
-                style={styles.itemContainer}
-              >
-              <DrawerItem
-                label={item.drawerLabel}
-                icon={({color, size}) => (
-                  <Icon
-                    name={item.drawerIcon}
-                    type='MaterialIcons'
-                    style={styles.drawerIcon}
-                  />
-                )}
-                style={styles.textDrawer}
-                labelStyle={styles.textDrawerItem}
-                onPress={() => {
-                  setDrawerSelected(index);
-                  props.navigation.navigate(item.routeName);
-                }}
-              />
-              <Icon
-                name={'navigate-next'}
-                type='MaterialIcons'
-                style={styles.drawerSuffixIcon}
-              />
-              </View>
-            </View>
-          )}
-        />
-      </View>
-    </DrawerContentScrollView>
-  );
-}
-const Home = ({navigation}) => {
-  return(
-    <SafeAreaProvider>
-      <Drawer.Navigator
-        initialRouteName="HomePage"
-        drawerStyle={styles.drawer}
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
-        drawerContentOptions={{
-          activeTintColor: '#e90000',
-          itemStyle: { marginVertical: 0 },
-        }}
-      >
-        <Drawer.Screen name="HomePage" component={HomePage} />
-      </Drawer.Navigator>
-    </SafeAreaProvider>
-  );
-}
 
 const styles = StyleSheet.create({
   /********** Sign In Screen**********/
@@ -381,4 +287,4 @@ const styles = StyleSheet.create({
     left: 15,
   },
 });
-export default Home;
+export default SignUp;
