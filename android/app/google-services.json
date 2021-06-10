@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "92502687275",
+    "firebase_url": "https://hanzoapp-a2e82-default-rtdb.firebaseio.com",
+    "project_id": "hanzoapp-a2e82",
+    "storage_bucket": "hanzoapp-a2e82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92502687275:android:b128bc8fbc32fd9d52346e",
+        "android_client_info": {
+          "package_name": "com.hanzoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "92502687275-8flqbgqp2i40ab7cgieikl1goo44itbv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hanzoapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "92502687275-q7bn36ch9dqiseutfe1ehffm2cgqbdmf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmLhWHvMEzXgFLuMRLsdgOn0ifKudVX3I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "92502687275-q7bn36ch9dqiseutfe1ehffm2cgqbdmf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
