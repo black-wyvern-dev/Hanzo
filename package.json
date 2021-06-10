@@ -10,6 +10,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-firebase/app": "^12.0.0",
+    "@react-native-firebase/auth": "^12.0.0",
+    "@react-native-firebase/firestore": "^12.0.0",
     "@react-navigation/drawer": "^5.12.5",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
@@ -23,12 +26,12 @@
     "react-native": "0.64.2",
     "react-native-elements": "^3.4.1",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-gifted-chat": "^0.16.3",
     "react-native-reanimated": "^2.2.0",
     "react-native-router-flux": "^4.3.1",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.3.0",
     "react-native-vector-icons": "^8.1.0",
-    "react-native-webview": "^11.6.2",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-action-buffer": "^1.2.0",

@@ -1,40 +1,53 @@
 import * as React from 'react';
-import {
-  Text,
-  StatusBar,
-  View,
-  TouchableOpacity,
-} from 'react-native';
-import SafeAreaView from 'react-native-safe-area-view';
-import { WebView } from 'react-native-webview';
-import styles from './HomeStyle';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
+
+import CreateChatRoom from './CreateChatRoom';
+import ChatRoom from './ChatRoom';
+import Messages from './Messages';
 
 // import { useGlobals } from '../../contexts/Global';
 
+const Stack = createStackNavigator();
+
 const HomePage = ({navigation}) => {
-  const [number, onChangeNumber] = React.useState(null);
 
   return (
-    <SafeAreaView style={[styles.container]}>
-      <StatusBar
-        barStyle="dark-content"
-        hidden={false}
-        backgroundColor="#FFFFFF"
-        translucent={true}
+    <NavigationContainer independent={true}>
+      <Stack.Navigator>
+        <Stack.Screen name="ChatRoom" component={ChatRoom} 
+          options={{
+            headerLeft: (props) => (
+              <HeaderBackButton
+                {...props}
+                // onPress={() => {
+                //   Stack.push('CreateChatRoom');
+                // }}
+              />
+            ),
+          }}
+          />
+        <Stack.Screen name="CreateChatRoom" component={CreateChatRoom} 
+          options={{
+            headerLeft: (props) => (
+              <HeaderBackButton
+                {...props}
+                // onPress={() => {
+                //   // navigation.navigate('ChatRoom');
+                // }}
+              />
+            ),
+          }}
       />
-      <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>
-        <WebView 
-          source={Platform.OS === 'ios' ? require('../../Assets/talkjs.html') : { uri: "file:///android_asset/talkjs.html" }}
-          style={{flex: 1, width: '100%'}} 
-          javaScriptEnabled={true}
-          domStorageEnabled={true}
-          originWhitelist={['file://', 'https://*']}
+        <Stack.Screen
+          name='Messages'
+          component={Messages}
+          options={({ route }) => ({
+            title: route.params.thread.name
+          })}
         />
-        <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-          <Text style={[styles.content, styles.signOut,{textAlign: 'center'}]}>Log out</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
