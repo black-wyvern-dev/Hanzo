@@ -10,6 +10,7 @@ import {
   FlatList,
   List,
   StyleSheet,
+  Platform,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -23,6 +24,8 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import { WebView } from 'react-native-webview';
+import { MessageList } from 'react-chat-elements/native';
 
 import { useGlobals } from '../contexts/Global';
 
@@ -39,10 +42,59 @@ const HomePage = ({navigation}) => {
         backgroundColor="#FFFFFF"
         translucent={true}
       />
-      <View style={[styles.inputContainer, {marginTop: 20}]}>
-        <Text>HomePage</Text>
+      <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>
+        <WebView 
+          source={Platform.OS === 'ios' ? require('../Assets/talkjs.html') : { uri: "file:///android_asset/talkjs.html" }}
+          style={{flex: 1, width: '100%'}} 
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          originWhitelist={['file://', 'https://*']}
+        />
         <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
-          <Text style={[styles.content, styles.signUp]}>Log out</Text>
+          <Text style={[styles.content, styles.signUp,{textAlign: 'center'}]}>Log out</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+const ChatPage = ({navigation}) => {
+  const [number, onChangeNumber] = React.useState(null);
+
+  return (
+    <SafeAreaView style={[styles.container]}>
+      <StatusBar
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor="#FFFFFF"
+        translucent={true}
+      />
+      <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>
+        <Text>Chat Page</Text>
+        <MessageList
+          className='message-list'
+          lockable={true}
+          toBottomHeight={'100%'}
+          dataSource={[
+              {
+                  position: 'right',
+                  type: 'text',
+                  text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+                  date: new Date(),
+              }, {
+                  position: 'left',
+                  type: 'text',
+                  text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+                  date: new Date(),
+              }, {
+                  position: 'right',
+                  type: 'text',
+                  text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+                  date: new Date(),
+              },
+          ]} />
+        <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+          <Text style={[styles.content, styles.signUp,{textAlign: 'center'}]}>Log out</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -56,7 +108,7 @@ function CustomDrawerContent(props) {
     {
       drawerLabel: 'Home',
       drawerIcon: 'home',
-      routeName: 'Home',
+      routeName: 'HomePage',
       group: '',
     },
     {
@@ -68,7 +120,7 @@ function CustomDrawerContent(props) {
     {
       drawerLabel: 'Customers',
       drawerIcon: 'account-box',
-      routeName: 'Home',
+      routeName: 'ChatPage',
       group: '',
     },
     {
@@ -179,6 +231,7 @@ const Home = ({navigation}) => {
         }}
       >
         <Drawer.Screen name="HomePage" component={HomePage} />
+        <Drawer.Screen name="ChatPage" component={ChatPage} />
       </Drawer.Navigator>
     </SafeAreaProvider>
   );
@@ -194,11 +247,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 50,
   },
-  mainContainer: {
-    width: '70%',
-    // height: '90%',
-    // flex: 1,
-  },
+  // mainContainer: {
+  //   width: '70%',
+  //   // height: '90%',
+  //   // flex: 1,
+  // },
   logo: {
     width: 100,
     height: 100,
@@ -214,7 +267,7 @@ const styles = StyleSheet.create({
     color: '#888',
   },
   inputContainer: {
-    marginVertical: 15,
+    marginBottom: 15,
   },
   input: {
     borderBottomWidth: 2,
