@@ -41,6 +41,12 @@ export const reducer = (state, action) => {
         ...state,
         userInfo: action.fields,
       };
+    case 'setMusicList':
+      // console.log(action.fields.data);
+      return {
+        ...state,
+        musicList: action.fields.data,
+      };
     case 'setLanguage':
       return {
         ...state,
@@ -63,6 +69,7 @@ export const initialState = {
   showLoader: false,
   day: DateUtils.toAmerican(new Date()),
   userInfo: {},
+  musicList: [],
   language: 'us',
 };
 

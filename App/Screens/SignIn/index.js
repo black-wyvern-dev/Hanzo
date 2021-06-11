@@ -22,7 +22,7 @@ import { Icon } from 'native-base';
 
 import { login, logo_request } from '../../apis/auth';
 import { baseUrl } from '../../apis/baseApi';
-import { resend } from '../../apis/update';
+import { getMusicList } from '../../apis/update';
 
 import { useGlobals } from '../../contexts/Global';
 import styles from './SignInStyle';
@@ -31,15 +31,12 @@ const SignIn = ({navigation}) => {
   const [{ userInfo }, dispatch] = useGlobals();
   const [userID, setUserID] = React.useState('user@gmail.com');
   const [password, setPassword] = React.useState('123456');
-  const [showAlert, setShowAlert] = React.useState(false);
   const [showProgress, setShowProgress] = React.useState(false);
+  const [showAlert, setShowAlert] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState('Unkown Error');
   
   const closeAlert = () => {
     setShowAlert(false);
-  }
-  const errorOccur = (error) => {
-    setErrorMsg(error);
   }
 
   React.useEffect(() => {

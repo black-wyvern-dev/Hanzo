@@ -9,45 +9,39 @@ import {
 import SafeAreaView from 'react-native-safe-area-view';
 import { Spinner } from 'native-base';
 import Separator from '../../Components/Separator';
+import { useGlobals } from '../../contexts/Global';
 
 import styles from './MusicListStyle';
 
 // import { useGlobals } from '../../contexts/Global';
+// const [musics, setMusics] = React.useState([
+//   {
+//     id: '1',
+//     url:
+//       'https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3',
+//     type: 'default',
+//     title: 'My Title',
+//     album: 'My Album',
+//     artist: 'Rohan Bhatia',
+//     artwork: 'https://picsum.photos/100',
+//  },
+//  {
+//    id: '2',
+//    url:
+//      'https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3',
+//    type: 'default',
+//    title: 'New Title',
+//    album: 'New Album',
+//    artist: 'Liu Xing',
+//    artwork: 'https://picsum.photos/100',
+// }
+// ]);
 
 const MusicList = ({navigation}) => {
-  const [musics, setMusics] = React.useState([
-    {
-      id: '1',
-      url:
-        'https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3',
-      type: 'default',
-      title: 'My Title',
-      album: 'My Album',
-      artist: 'Rohan Bhatia',
-      artwork: 'https://picsum.photos/100',
-   },
-   {
-     id: '2',
-     url:
-       'https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3',
-     type: 'default',
-     title: 'New Title',
-     album: 'New Album',
-     artist: 'Liu Xing',
-     artwork: 'https://picsum.photos/100',
-  }
-  ]);
+  const [{ musicList }, dispatch] = useGlobals();
   const [loading, setLoading] = React.useState(false);
-
+//  console.log(musicList);
   React.useEffect(() => {
-    // const unsubscribe = firestore()
-    //     setThreads(threads);
-    //     if (loading) {
-    //       setLoading(false);
-    //     }
-    //   });
-
-    // return () => unsubscribe();
   }, []);
 
   if (loading) {
@@ -65,7 +59,7 @@ const MusicList = ({navigation}) => {
       <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>
         <View style={styles.listContainer}>
           <FlatList
-            data={musics}
+            data={musicList}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => navigation.navigate('MusicPlayer', { music: item })}>
