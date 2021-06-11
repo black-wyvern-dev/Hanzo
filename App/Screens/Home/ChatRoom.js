@@ -9,7 +9,6 @@ import {
 import SafeAreaView from 'react-native-safe-area-view';
 import styles from './HomeStyle';
 import firestore from '@react-native-firebase/firestore';
-import { ChatList } from 'react-chat-elements/native';
 import { Spinner } from 'native-base';
 // import { useGlobals } from '../../contexts/Global';
 import Separator from '../../Components/Separator';
@@ -31,19 +30,7 @@ const ChatRoom = ({navigation}) => {
             ...documentSnapshot.data()
           }
         });
-        // let roomList = [];
-        // for(let thread of threads) {
-        //   roomList.push({
-        //     avatar: 'https://picsum.photos/150/150',
-        //     alt: thread._id,
-        //     title: thread.name,
-        //     subtitle: thread.latestMessage.text.slice(0,90),
-        //     date: new Date(thread.latestMessage.createdAt),
-        //     unread: 0,
-        //   });
-        // }
         setThreads(threads);
-        console.log(threads);
         if (loading) {
           setLoading(false);
         }
@@ -86,9 +73,6 @@ const ChatRoom = ({navigation}) => {
             ItemSeparatorComponent={() => <Separator />}
           />
         </View>
-        <TouchableOpacity onPress={()=>navigation.navigate('CreateChatRoom')}>
-          <Text style={[styles.content, styles.signOut,{textAlign: 'center'}]}>Create Chatroom</Text>
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

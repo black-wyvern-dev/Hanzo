@@ -5,6 +5,7 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Button,
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import styles from './HomeStyle';
@@ -56,7 +57,7 @@ const CreateChatRoom = ({navigation}) => {
           value={roomName}
         />
         <TouchableOpacity onPress={()=>handleButtonPress()}>
-          <Text style={[styles.content, styles.signOut,{textAlign: 'center'}]}>Create Chatroom</Text>
+          <Button style={[{textAlign: 'center'}]} title={'Create Chatroom'} />
         </TouchableOpacity>
       </View>
     </SafeAreaView>

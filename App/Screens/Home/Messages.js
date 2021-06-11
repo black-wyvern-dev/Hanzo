@@ -3,8 +3,11 @@ import { GiftedChat } from 'react-native-gifted-chat'
 import firestore from '@react-native-firebase/firestore'
 import auth from '@react-native-firebase/auth'
 
+import { useGlobals } from '../../contexts/Global';
 
 export default function Messages({ route }) {
+  const [{ userInfo }, dispatch] = useGlobals();
+  const { thread } = route.params
   const [messages, setMessages] = useState([
     {
       _id: 0,
@@ -22,77 +25,78 @@ export default function Messages({ route }) {
       }
     }
   ])
-    const { thread } = route.params
-    // const user = auth().currentUser.toJSON()
 
-    function handleSend(newMessage = []) {
-        const text = newMessage[0].text
-        // firestore()
-        //     .collection('MESSAGE_THREADS')
-        //     .doc(thread._id)
-        //     .collection('MESSAGES')
-        //     .add({
-        //         text,
-        //         createdAt: new Date().getTime(),
-        //         user: {
-        //         _id: user.uid,
-        //         displayName: user.displayName
-        //         }
-        //     })
-        // await firestore()
-        //     .collection('MESSAGE_THREADS')
-        //     .doc(thread._id)
-        //     .set(
-        //         {
-        //         latestMessage: {
-        //             text,
-        //             createdAt: new Date().getTime()
-        //         }
-        //         },
-        //         { merge: true }
-        //     )
-        setMessages(GiftedChat.append(messages, newMessage))
+  async function handleSend(messages = []) {
+        const text = messages[0].text
+        console.log(userInfo.id);
+        console.log(messages);
+        console.log(thread._id);
+        firestore()
+            .collection('MESSAGE_THREADS')
+            .doc(thread._id)
+            .collection('MESSAGES')
+            .add({
+                text,
+                createdAt: new Date().getTime(),
+                user: {
+                _id: userInfo.id,
+                displayName: userInfo.firstName + ' ' + userInfo.lastName,
+                }
+            })
+        await firestore()
+            .collection('MESSAGE_THREADS')
+            .doc(thread._id)
+            .set(
+                {
+                latestMessage: {
+                    text,
+                    createdAt: new Date().getTime()
+                }
+                },
+                { merge: true }
+            )
+        // setMessages(GiftedChat.append(messages, newMessage))
     }
 
-    // useEffect(() => {
-    // const unsubscribeListener = firestore()
-    //     .collection('MESSAGE_THREADS')
-    //     .doc(thread._id)
-    //     .collection('MESSAGES')
-    //     .orderBy('createdAt', 'desc')
-    //     .onSnapshot(querySnapshot => {
-    //     const messages = querySnapshot.docs.map(doc => {
-    //         const firebaseData = doc.data()
+    useEffect(() => {
+    const unsubscribeListener = firestore()
+        .collection('MESSAGE_THREADS')
+        .doc(thread._id)
+        .collection('MESSAGES')
+        .orderBy('createdAt', 'desc')
+        .onSnapshot(querySnapshot => {
+        const messages = querySnapshot.docs.map(doc => {
+            const firebaseData = doc.data()
 
-    //         const data = {
-    //         _id: doc.id,
-    //         text: '',
-    //         createdAt: new Date().getTime(),
-    //         ...firebaseData
-    //         }
+            const data = {
+            _id: doc.id,
+            text: '',
+            createdAt: new Date().getTime(),
+            ...firebaseData
+            }
 
-    //         if (!firebaseData.system) {
-    //         data.user = {
-    //             ...firebaseData.user,
-    //             name: firebaseData.user.displayName
-    //         }
-    //         }
+            if (!firebaseData.system) {
+            data.user = {
+                ...firebaseData.user,
+                name: firebaseData.user.displayName
+            }
+            }
 
-    //         return data
-    //     })
+            return data
+        })
 
-    //     setMessages(messages)
-    //     })
+        setMessages(messages)
+        })
 
-    // return () => unsubscribeListener()
-    // }, [])
+    return () => unsubscribeListener()
+    }, [])
 
     return (
     <GiftedChat
         messages={messages}
         onSend={handleSend}
         user={{
-            _id: '0'//user.uid
+            _id: userInfo.id
         }}
     />
     )

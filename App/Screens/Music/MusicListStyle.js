@@ -8,31 +8,16 @@ const styles = StyleSheet.create({
     width: '100%',
     flex: 1,
     alignItems: 'center',
+    // marginTop: 50,
   },
   inputContainer: {
-    marginBottom: 15,
-  },
-  content: {
-    color: '#888',
-  },
-  signOut: {
-    color: '#F66',
-  },
-  input: {
-    borderBottomWidth: 2,
-    borderBottomColor: '#DDD',
-    paddingBottom: 1,
-    marginBottom: 10,
+    // marginBottom: 15,
+    alignItems: 'center',
   },
   listContainer: {
     flex: 1,
+    width: '100%',
     // backgroundColor: '#dee2eb'
-  },
-  title: {
-    marginTop: 20,
-    marginBottom: 30,
-    fontSize: 28,
-    fontWeight: '500'
   },
   row: {
     paddingRight: 10,
@@ -42,7 +27,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   content: {
-    flexShrink: 1
+    flexShrink: 1,
+    color: '#888',
   },
   header: {
     flexDirection: 'row'
@@ -56,7 +42,10 @@ const styles = StyleSheet.create({
     color: '#949494',
     fontSize: 16,
     marginTop: 2
-  }
-})
+  },
+  signOut: {
+    color: '#F66',
+  },
+});
 
 export default styles;

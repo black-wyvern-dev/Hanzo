@@ -30,7 +30,7 @@ import { MessageList } from 'react-chat-elements/native';
 import { useGlobals } from '../contexts/Global';
 import styles from './MainStyle';
 import HomePage from './Home';
-import ChatPage from './Chat';
+import MusicPage from './Music';
 
 const Drawer = createDrawerNavigator();
 
@@ -53,13 +53,13 @@ function CustomDrawerContent(props) {
     {
       drawerLabel: 'Customers',
       drawerIcon: 'account-box',
-      routeName: 'ChatPage',
+      routeName: 'Main',
       group: '',
     },
     {
       drawerLabel: 'Music',
       drawerIcon: 'favorite',
-      routeName: 'Main',
+      routeName: 'MusicPage',
       group: '',
     },
     {
@@ -79,6 +79,12 @@ function CustomDrawerContent(props) {
       drawerIcon: 'settings',
       routeName: 'Main',
       group: '1',
+    },
+    {
+      drawerLabel: 'SignOut',
+      drawerIcon: 'logout',
+      routeName: 'SignIn',
+      group: '',
     },
   ]);
   const [drawerSelected, setDrawerSelected] = React.useState(0);
@@ -101,6 +107,7 @@ function CustomDrawerContent(props) {
           name={'close'}
           type='MaterialIcons'
           style={styles.drawerCloseIcon}
+          onPress={()=>props.hideDrawer()}
         />
         <Image
           source={{uri: 'https://picsum.photos/200/200'}}
@@ -164,7 +171,7 @@ const Main = ({navigation}) => {
         }}
       >
         <Drawer.Screen name="HomePage" component={HomePage} />
-        <Drawer.Screen name="ChatPage" component={ChatPage} />
+        <Drawer.Screen name="MusicPage" component={MusicPage} />
       </Drawer.Navigator>
     </SafeAreaProvider>
   );

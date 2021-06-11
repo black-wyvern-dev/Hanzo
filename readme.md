@@ -10,3 +10,9 @@ npx react-native run-ios
 # for Android
 
 npx react-native run-android
+
+
+# Backend API Base URL config
+# App/Config/baseApi.js
+baseUrl = 'http://192.168.104.56:8000';
+# Replace baseUrl to the Laravel Backend Server Url

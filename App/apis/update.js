@@ -70,3 +70,56 @@ export const resend = (agent_id = {}, token = '') => {
       return { errors: 'Update failure: ' + error.message };
     });
 };
+
+export const getMusicList = (token = '') => {
+  console.log('request for music list: ');
+  // console.log(token);
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  return api
+    .post('api/getmusiclist', config)
+    .then((resp) => {
+      console.log('GetMusicList success :');
+      let rspData = resp.data;
+      if (!rspData || !rspData.success) {
+        // console.log(typeof(rspData));
+        rspData = JSON.parse(resp.data.concat('}'));
+        // console.log(rspData);
+        // return {};
+      }
+      // console.log('responsed data OK: '); //, rspData.success);
+      // const data = rspData.success.auth;
+      // const branch_name = rspData.success.branch_name;
+      // const company_info = rspData.success.company_info;
+      // const template = rspData.success.current_template;
+      // const survey = rspData.success.current_survey;
+      // const languages = rspData.success.languages;
+      // const questions = rspData.success.questions;
+      // const header_color = rspData.success.header_color;
+      // const footer_color = rspData.success.footer_color;
+      // const background_color = rspData.success.background_color;
+      // const ratings = rspData.success.ratings;
+      // const brands = rspData.success.brands;
+      // const message = rspData.success.message;
+      return {
+        // data,
+        // branch_name,
+        // company_info,
+        // template,
+        // survey,
+        // header_color,
+        // footer_color,
+        // background_color,
+        // languages,
+        // questions,
+        // ratings,
+        // brands,
+        // message,
+      };
+    })
+    .catch((error) => {
+      console.log('GetMusicList Axios Error :' + error.message);
+      return { errors: 'GetList failure: ' + error.message };
+    });
+};
