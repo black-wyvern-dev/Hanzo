@@ -8,34 +8,54 @@ import {
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import Separator from '../../Components/Separator';
+import Carousel from 'react-native-snap-carousel';
 
 import styles from './GameListStyle';
-
 // import { useGlobals } from '../../contexts/Global';
 
-const GameList = ({navigation}) => {
-  const [musics, setMusics] = React.useState([
-      {
-        id: '1',
-        url:
-          'https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3',
-        type: 'default',
-        title: 'My Title',
-        album: 'My Album',
-        artist: 'Rohan Bhatia',
-        artwork: 'https://picsum.photos/100',
+const GameList = ({ navigation }) => {
+  const [carouselItems, setCarouselItems] = React.useState([
+    {
+      title: "Item 1",
+      text: "Text 1",
     },
     {
-      id: '2',
-      url:
-        'https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3',
-      type: 'default',
-      title: 'New Title',
-      album: 'New Album',
-      artist: 'Liu Xing',
-      artwork: 'https://picsum.photos/100',
-    }
+      title: "Item 2",
+      text: "Text 2",
+    },
+    {
+      title: "Item 3",
+      text: "Text 3",
+    },
+    {
+      title: "Item 4",
+      text: "Text 4",
+    },
+    {
+      title: "Item 5",
+      text: "Text 5",
+    },
   ]);
+
+  let [activeIndex, setActiveIndex] = React.useState(0);
+
+  const _renderItem = ({ item, index }) => {
+    return (
+      <View style={{
+        backgroundColor: 'floralwhite',
+        borderRadius: 5,
+        height: 250,
+        padding: 50,
+        marginLeft: 25,
+        marginRight: 25,
+      }}>
+        <Text style={{ fontSize: 30 }}>{item.title}</Text>
+        <Text>{item.text}</Text>
+      </View>
+
+    )
+  }
+
   return (
     <SafeAreaView style={[styles.container]}>
       <StatusBar
@@ -44,28 +64,15 @@ const GameList = ({navigation}) => {
         backgroundColor="#FFFFFF"
         translucent={true}
       />
-      <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>
-        <View style={styles.listContainer}>
-          <FlatList
-            data={musics}
-            keyExtractor={item => item.id}
-            renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => navigation.navigate('GameLayer')}>
-                <View style={styles.row}>
-                  <View style={styles.content}>
-                    <View style={styles.header}>
-                      <Text style={styles.nameText}>{item.title}</Text>
-                    </View>
-                    <Text style={styles.contentText}>
-                      {item.album+'     '+item.artist}
-                    </Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            )}
-            ItemSeparatorComponent={() => <Separator />}
-          />
-        </View>
+      <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
+        <Carousel
+          layout={"default"}
+          ref={ref => this.carousel = ref}
+          data={carouselItems}
+          sliderWidth={300}
+          itemWidth={300}
+          renderItem={_renderItem}
+          onSnapToItem={index => setActiveIndex(index)} />
       </View>
     </SafeAreaView>
   );

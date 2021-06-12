@@ -58,11 +58,11 @@ const Routes = () => {
                 }
             >
             <NavigationContainer>
-            <Stack.Navigator headerMode="none">
-                <Stack.Screen name="SignIn" component={SignIn} />
-                <Stack.Screen name="SignUp" component={SignUp} />
-                <Stack.Screen name="Main" component={Main} />
-            </Stack.Navigator>
+                <Stack.Navigator headerMode="none">
+                    <Stack.Screen name="SignIn" component={SignIn} />
+                    <Stack.Screen name="SignUp" component={SignUp} />
+                    <Stack.Screen name="Main" component={Main} />
+                </Stack.Navigator>
             </NavigationContainer>
             </PaperProvider>
           </PreferencesContext.Provider>

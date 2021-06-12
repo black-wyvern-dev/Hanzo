@@ -19,9 +19,6 @@ const GameLayer = ({ navigation, route }) => {
         backgroundColor="#FFFFFF"
         translucent={true}
       />
-      <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>  
-        <Text>GameLayer</Text>
-      </View>
     </SafeAreaView>
   );
 };

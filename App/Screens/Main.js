@@ -92,8 +92,8 @@ function CustomDrawerContent(props) {
     },
   ]);
   const [drawerSelected, setDrawerSelected] = React.useState(0);
-  
-  const ItemHeader = ({item, index}) => {
+
+  const ItemHeader = ({ item, index }) => {
     const indexPosition = drawerItems.findIndex(
       (obj) => obj.group === item.group,
     );
@@ -111,48 +111,48 @@ function CustomDrawerContent(props) {
           name={'close'}
           type='MaterialIcons'
           style={styles.drawerCloseIcon}
-          onPress={()=>props.hideDrawer()}
+          onPress={() => props.hideDrawer()}
         />
         <Image
-          source={{uri: 'https://picsum.photos/200/200'}}
+          source={{ uri: 'https://picsum.photos/200/200' }}
           style={styles.imageProfile}
         />
-        <Text style={styles.textName}>{userInfo.firstName+' '+userInfo.lastName}</Text>
+        <Text style={styles.textName}>{userInfo.firstName + ' ' + userInfo.lastName}</Text>
         <Text numberOfLines={1} style={styles.textEmail}>
           {userInfo.email}
         </Text>
       </View>
       <View style={styles.containerContent}>
-        <FlatList 
+        <FlatList
           data={drawerItems}
           keyExtractor={(item, index) => String(index + JSON.stringify(item))}
-          renderItem={({item, index}) => (
+          renderItem={({ item, index }) => (
             <View>
               <ItemHeader item={item} index={index} />
               <View
                 style={styles.itemContainer}
               >
-              <DrawerItem
-                label={item.drawerLabel}
-                icon={({color, size}) => (
-                  <Icon
-                    name={item.drawerIcon}
-                    type='MaterialIcons'
-                    style={styles.drawerIcon}
-                  />
-                )}
-                style={styles.textDrawer}
-                labelStyle={styles.textDrawerItem}
-                onPress={() => {
-                  setDrawerSelected(index);
-                  props.navigation.navigate(item.routeName);
-                }}
-              />
-              <Icon
-                name={'navigate-next'}
-                type='MaterialIcons'
-                style={styles.drawerSuffixIcon}
-              />
+                <DrawerItem
+                  label={item.drawerLabel}
+                  icon={({ color, size }) => (
+                    <Icon
+                      name={item.drawerIcon}
+                      type='MaterialIcons'
+                      style={styles.drawerIcon}
+                    />
+                  )}
+                  style={styles.textDrawer}
+                  labelStyle={styles.textDrawerItem}
+                  onPress={() => {
+                    setDrawerSelected(index);
+                    props.navigation.navigate(item.routeName);
+                  }}
+                />
+                <Icon
+                  name={'navigate-next'}
+                  type='MaterialIcons'
+                  style={styles.drawerSuffixIcon}
+                />
               </View>
             </View>
           )}
@@ -162,8 +162,8 @@ function CustomDrawerContent(props) {
   );
 }
 
-const Main = ({navigation}) => {
-  return(
+const Main = ({ navigation }) => {
+  return (
     <SafeAreaProvider>
       <Drawer.Navigator
         initialRouteName="HomePage"
