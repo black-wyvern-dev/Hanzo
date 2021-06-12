@@ -12,30 +12,30 @@ import Separator from '../../Components/Separator';
 import styles from './RankListStyle';
 
 // import { useGlobals } from '../../contexts/Global';
-const [musics, setMusics] = React.useState([
+
+const RankList = ({navigation}) => {
+  const [musics, setMusics] = React.useState([
+      {
+        id: '1',
+        url:
+          'https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3',
+        type: 'default',
+        title: 'My Title',
+        album: 'My Album',
+        artist: 'Rohan Bhatia',
+        artwork: 'https://picsum.photos/100',
+    },
     {
-      id: '1',
+      id: '2',
       url:
         'https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3',
       type: 'default',
-      title: 'My Title',
-      album: 'My Album',
-      artist: 'Rohan Bhatia',
+      title: 'New Title',
+      album: 'New Album',
+      artist: 'Liu Xing',
       artwork: 'https://picsum.photos/100',
-  },
-  {
-    id: '2',
-    url:
-      'https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3',
-    type: 'default',
-    title: 'New Title',
-    album: 'New Album',
-    artist: 'Liu Xing',
-    artwork: 'https://picsum.photos/100',
-  }
-]);
-
-const RankList = ({navigation}) => {
+    }
+  ]);
   return (
     <SafeAreaView style={[styles.container]}>
       <StatusBar
