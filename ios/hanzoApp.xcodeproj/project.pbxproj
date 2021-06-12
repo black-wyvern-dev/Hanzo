@@ -48,6 +48,8 @@
 		4E5C1BB973874B5AA14B748F /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB896485D21F4DA2A69161DA /* SimpleLineIcons.ttf */; };
 		80BA432898034AED84F26BE2 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 101C8FFBA36C42899671C199 /* Zocial.ttf */; };
 		A21ADC22DFED4BB59956F85C /* bradhitc.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2602F54E6EE54BF6AFAEDB09 /* bradhitc.ttf */; };
+		B35274255B90497B9FAC3E1A /* BradleyHandITCTT-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE0F4A0ACB37415FA82FE68F /* BradleyHandITCTT-Bold.ttf */; };
+		FBF41842834E45058228B5AD /* Bradleys Pen.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D677BB34CC44DABAF656FE0 /* Bradleys Pen.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,8 @@
 		AB896485D21F4DA2A69161DA /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		101C8FFBA36C42899671C199 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		2602F54E6EE54BF6AFAEDB09 /* bradhitc.ttf */ = {isa = PBXFileReference; name = "bradhitc.ttf"; path = "../App/Assets/Fonts/bradhitc.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EE0F4A0ACB37415FA82FE68F /* BradleyHandITCTT-Bold.ttf */ = {isa = PBXFileReference; name = "BradleyHandITCTT-Bold.ttf"; path = "../App/Assets/Fonts/BradleyHandITCTT-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4D677BB34CC44DABAF656FE0 /* Bradleys Pen.ttf */ = {isa = PBXFileReference; name = "Bradleys Pen.ttf"; path = "../App/Assets/Fonts/Bradleys Pen.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +240,8 @@
 				AB896485D21F4DA2A69161DA /* SimpleLineIcons.ttf */,
 				101C8FFBA36C42899671C199 /* Zocial.ttf */,
 				2602F54E6EE54BF6AFAEDB09 /* bradhitc.ttf */,
+				EE0F4A0ACB37415FA82FE68F /* BradleyHandITCTT-Bold.ttf */,
+				4D677BB34CC44DABAF656FE0 /* Bradleys Pen.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -367,6 +373,8 @@
 				4E5C1BB973874B5AA14B748F /* SimpleLineIcons.ttf in Resources */,
 				80BA432898034AED84F26BE2 /* Zocial.ttf in Resources */,
 				A21ADC22DFED4BB59956F85C /* bradhitc.ttf in Resources */,
+				B35274255B90497B9FAC3E1A /* BradleyHandITCTT-Bold.ttf in Resources */,
+				FBF41842834E45058228B5AD /* Bradleys Pen.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

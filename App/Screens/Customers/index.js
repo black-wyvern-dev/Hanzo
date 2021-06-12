@@ -69,9 +69,9 @@ const CustomerPage = ({navigation}) => {
                   )
                 }
                 titleStyle={{
-                  fontSize: 18,
-                  fontFamily: 'Bradley Hand ITC',
-                  fontWeight: 'bold',
+                  fontSize: 28,
+                  fontFamily: 'Bradleys Pen',
+                  // fontWeight: 'bold',
                   color: theme.colors.primary,
                   alignSelf: 'center',
                 }}
