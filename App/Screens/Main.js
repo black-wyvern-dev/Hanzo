@@ -31,6 +31,10 @@ import { useGlobals } from '../contexts/Global';
 import styles from './MainStyle';
 import HomePage from './Home';
 import MusicPage from './Music';
+import CustomerPage from './Customers';
+import GamePage from './Game';
+import RankingPage from './Ranking';
+import WalletPage from './Wallet';
 
 const Drawer = createDrawerNavigator();
 
@@ -47,13 +51,13 @@ function CustomDrawerContent(props) {
     {
       drawerLabel: 'Ranking',
       drawerIcon: 'assessment',
-      routeName: 'Main',
+      routeName: 'RankingPage',
       group: '',
     },
     {
       drawerLabel: 'Customers',
       drawerIcon: 'account-box',
-      routeName: 'Main',
+      routeName: 'CustomerPage',
       group: '',
     },
     {
@@ -65,13 +69,13 @@ function CustomDrawerContent(props) {
     {
       drawerLabel: 'Wallet',
       drawerIcon: 'shopping-basket',
-      routeName: 'Main',
+      routeName: 'WalletPage',
       group: '',
     },
     {
       drawerLabel: 'Game',
       drawerIcon: 'videogame-asset',
-      routeName: 'Main',
+      routeName: 'GamePage',
       group: '',
     },
     {
@@ -172,6 +176,10 @@ const Main = ({navigation}) => {
       >
         <Drawer.Screen name="HomePage" component={HomePage} />
         <Drawer.Screen name="MusicPage" component={MusicPage} />
+        <Drawer.Screen name="CustomerPage" component={CustomerPage} />
+        <Drawer.Screen name="GamePage" component={GamePage} />
+        <Drawer.Screen name="RankingPage" component={RankingPage} />
+        <Drawer.Screen name="WalletPage" component={WalletPage} />
       </Drawer.Navigator>
     </SafeAreaProvider>
   );
