@@ -16,7 +16,7 @@ import { sliderWidth, itemWidth } from './GameSliderEntryStyle';
 
 const GameList = ({ navigation }) => {
 
-  ENTRIES1 = [
+  const ENTRIES1 = [
     {
       title: 'Beautiful and dramatic Antelope Canyon',
       subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
