@@ -9,6 +9,7 @@ import RankList from './RankList';
 const Stack = createStackNavigator();
 
 const RankingPage = ({navigation}) => {
+  const superNavigation = navigation;
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator>
@@ -20,6 +21,7 @@ const RankingPage = ({navigation}) => {
                 type='MaterialIcons'
                 style={{fontSize: 20, marginLeft: 10}}
                 onPress={() => {
+                  superNavigation.openDrawer();
                 }}
               />
             ),

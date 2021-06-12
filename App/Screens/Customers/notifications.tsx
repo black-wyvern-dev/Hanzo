@@ -4,21 +4,21 @@ import { Dimensions } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
-import overlay from './overlay';
-import { Feed } from './feed';
+// import overlay from './overlay';
+import { FeedOld } from './feedold';
 import { AllNotifications } from './all';
 
 const initialLayout = { width: Dimensions.get('window').width };
 
 const All = () => <AllNotifications />;
 
-const Mentions = () => <Feed />;
+const Mentions = () => <FeedOld />;
 
 export const Notifications = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'all', title: 'All' },
-    { key: 'mentions', title: 'Mentions' },
+    { key: 'mentions', title: 'Post of yesterday' },
+    // { key: 'all', title: 'All' },
   ]);
 
   const theme = useTheme();
@@ -29,7 +29,7 @@ export const Notifications = () => {
   });
 
   const tabBarColor = //theme.dark
-    //? (overlay(4, theme.colors.surface) as string)
+    // ? (overlay(4, theme.colors.surface) as string)
      theme.colors.primary;
 
   const rippleColor = theme.dark

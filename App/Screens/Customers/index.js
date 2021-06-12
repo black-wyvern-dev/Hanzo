@@ -17,6 +17,7 @@ const Stack = createStackNavigator();
 const CustomerPage = ({navigation}) => {
   const [{ userInfo }, dispatch] = useGlobals();
   const theme = useTheme();
+  const superNavigation = navigation;
   return (
     <NavigationContainer independent={true}>
     <Stack.Navigator
@@ -46,14 +47,15 @@ const CustomerPage = ({navigation}) => {
                 <TouchableOpacity
                   style={{ marginLeft: 10 }}
                   onPress={() => {
-                    // ((navigation as any) as DrawerNavigationProp<{}>).openDrawer();
+                    superNavigation.openDrawer();
                   }}
                 >
-                  <Avatar.Image
-                    size={40}
-                    source={{
-                      uri:
-                        'https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg',
+                  <Icon
+                    name='home'
+                    type='MaterialIcons'
+                    style={{fontSize: 20, marginRight: 10, color: theme.colors.primary}}
+                    onPress={() => {
+                      superNavigation.openDrawer();
                     }}
                   />
                 </TouchableOpacity>
@@ -61,19 +63,14 @@ const CustomerPage = ({navigation}) => {
               <Appbar.Content
                 title={
                   title === 'Feed' ? (
-                    <Icon
-                      name='twitter'
-                      type='MaterialCommunityIcons'
-                      style={{fontSize: 20, marginRight: 10, color: theme.colors.primary}}
-                      onPress={() => {
-                      }}
-                    />
+                    'Shill Room'
                   ) : (
                     title
                   )
                 }
                 titleStyle={{
                   fontSize: 18,
+                  fontFamily: 'Bradley Hand ITC',
                   fontWeight: 'bold',
                   color: theme.colors.primary,
                   alignSelf: 'center',
@@ -88,30 +85,16 @@ const CustomerPage = ({navigation}) => {
         name="FeedList"
         component={BottomTabs}
         options={({ route }) => {
-          const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
-          return { headerTitle: routeName };
+          // const routeName = getFocusedRouteNameFromRoute(route) ?? ;
+          return { headerTitle: 'Feed' };
         }}
       />
       <Stack.Screen
         name="Details"
         component={Details}
-        options={{ headerTitle: 'Tweet' }}
+        options={{ headerTitle: 'Shill Room' }}
       />
     </Stack.Navigator>
-      {/* <Stack.Navigator>
-        <Stack.Screen name="CustomersLayer" component={CustomersLayer} 
-          options={({navigation, route}) => ({
-            headerLeft: () => (
-              <Icon
-                name='home'
-                type='MaterialIcons'
-                style={{fontSize: 20, marginLeft: 10}}
-                onPress={() => {
-                }}
-              />
-            ),
-          })} />
-      </Stack.Navigator> */}
     </NavigationContainer>
   );
 };
