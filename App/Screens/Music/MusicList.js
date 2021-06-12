@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
+import { useTheme } from 'react-native-paper';
 import { Spinner } from 'native-base';
 import Separator from '../../Components/Separator';
 import { useGlobals } from '../../contexts/Global';
@@ -38,6 +39,7 @@ import styles from './MusicListStyle';
 // ]);
 
 const MusicList = ({navigation}) => {
+  const theme = useTheme();
   const [{ musicList }, dispatch] = useGlobals();
   const [loading, setLoading] = React.useState(false);
 //  console.log(musicList);
@@ -53,7 +55,7 @@ const MusicList = ({navigation}) => {
       <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor="#FFFFFF"
+        backgroundColor={theme.colors.text}
         translucent={true}
       />
       <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>

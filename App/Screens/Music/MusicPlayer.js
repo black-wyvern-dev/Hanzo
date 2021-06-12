@@ -12,6 +12,7 @@ import SafeAreaView from 'react-native-safe-area-view';
 import TrackPlayer from 'react-native-track-player';
 import {useTrackPlayerProgress} from 'react-native-track-player/lib/hooks';
 import Slider from '@react-native-community/slider';
+import { useTheme } from 'react-native-paper';
 import {useTrackPlayerEvents} from 'react-native-track-player/lib/hooks';
 import {TrackPlayerEvents,STATE_PLAYING} from 'react-native-track-player';
 
@@ -47,6 +48,7 @@ const trackPlayerInit = async (music) => {
 };
 
 const MusicPlayer = ({ navigation, route }) => {
+  const theme = useTheme();
   const { music } = route.params;
   //state to manage whether track player is initialized or not
   const [isTrackPlayerInit, setIsTrackPlayerInit] = React.useState(false);
@@ -107,7 +109,7 @@ const MusicPlayer = ({ navigation, route }) => {
       <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor="#FFFFFF"
+        backgroundColor={theme.colors.text}
         translucent={true}
       />
       <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>     
