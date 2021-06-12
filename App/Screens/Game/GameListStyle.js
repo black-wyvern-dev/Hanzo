@@ -1,48 +1,86 @@
-import * as React from 'react';
-import {
-  StyleSheet,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export const colors = {
+  black: '#1a1917',
+  gray: '#888888',
+  background1: '#B721FF',
+  background2: '#21D4FD'
+};
+
+export default StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.black
+  },
+
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
+  },
+
   container: {
-    width: '100%',
     flex: 1,
-    alignItems: 'center',
-    // marginTop: 50,
+    backgroundColor: colors.background1
   },
-  inputContainer: {
-    // marginBottom: 15,
-    alignItems: 'center',
+  gradient: {
+    ...StyleSheet.absoluteFillObject
   },
-  listContainer: {
-    flex: 1,
+  scrollview: {
+    flex: 1
+  },
+  exampleContainer: {
+    paddingVertical: 30
+  },
+  exampleContainerDark: {
+    backgroundColor: colors.black
+  },
+  exampleContainerLight: {
+    backgroundColor: 'white'
+  },
+  title: {
+    paddingHorizontal: 30,
+    backgroundColor: 'transparent',
+    color: 'rgba(255, 255, 255, 0.9)',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  titleDark: {
+    color: colors.black
+  },
+  subtitle: {
+    marginTop: 5,
+    paddingHorizontal: 30,
+    backgroundColor: 'transparent',
+    color: 'rgba(255, 255, 255, 0.75)',
+    fontSize: 13,
+    fontStyle: 'italic',
+    textAlign: 'center'
+  },
+  slider: {
+    marginTop: 15,
+    overflow: 'visible' // for custom animations
+  },
+  sliderContentContainer: {
+    paddingVertical: 10 // for custom animation
+  },
+  paginationContainer: {
+    paddingVertical: 8
+  },
+  paginationDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 8
+  },
+  imageBackgroundStyle: {
     width: '100%',
-    // backgroundColor: '#dee2eb'
+    height: '100%'
   },
-  row: {
-    paddingRight: 10,
-    paddingLeft: 5,
-    paddingVertical: 5,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  content: {
-    flexShrink: 1,
-    color: '#888',
-  },
-  header: {
-    flexDirection: 'row'
-  },
-  nameText: {
-    fontWeight: '600',
-    fontSize: 18,
-    color: '#000'
-  },
-  contentText: {
-    color: '#949494',
-    fontSize: 16,
-    marginTop: 2
-  },
+  imageBackgroundOverlay: {
+    backgroundColor: 'rgba(0,0,0,0.8)',
+    width: '100%',
+    height: '100%'
+  }
 });
-
-export default styles;
