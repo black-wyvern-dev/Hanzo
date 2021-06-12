@@ -12,7 +12,7 @@ const GamePage = ({navigation}) => {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator>
-        <Stack.Screen name="GameList" component={GameList} 
+        <Stack.Screen name="GameList" component={GameLayer} 
           options={({navigation, route}) => ({
             headerLeft: () => (
               <Icon

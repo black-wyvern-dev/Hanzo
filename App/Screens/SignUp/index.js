@@ -15,13 +15,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SafeAreaView from 'react-native-safe-area-view';
+import { useTheme } from 'react-native-paper';
 import { SocialIcon } from 'react-native-elements';
 import { Icon } from 'native-base';
 
 import styles from './SignUpStyle';
 
 const SignUp = ({navigation}) => {
-   const [text, onChangeText] = React.useState(null);
+  const theme = useTheme();
+  const [text, onChangeText] = React.useState(null);
   const [number, onChangeNumber] = React.useState(null);
   const [check, onCheckChanged] = React.useState(false);
   const onCheckToggled = () => {
@@ -32,7 +34,7 @@ const SignUp = ({navigation}) => {
       <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor="#FFFFFF"
+        backgroundColor={theme.colors.text}
         translucent={true}
       />
       <View style={[styles.mainContainer]}>

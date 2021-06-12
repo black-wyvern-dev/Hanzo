@@ -29,7 +29,6 @@ const Routes = () => {
     }
     const toggleRTL = React.useCallback(() => {
       I18nManager.forceRTL(!rtl);
-      Updates.reloadFromCache();
     }, [rtl]);
     const preferences = React.useMemo(
       () => ({

@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { Button, Overlay } from 'react-native-elements';
 import { Spinner } from 'native-base';
+import { useTheme } from 'react-native-paper';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -26,8 +27,10 @@ import { getMusicList } from '../../apis/update';
 
 import { useGlobals } from '../../contexts/Global';
 import styles from './SignInStyle';
+import color from 'color';
 
 const SignIn = ({navigation}) => {
+  const theme = useTheme();
   const [{ userInfo }, dispatch] = useGlobals();
   const [userID, setUserID] = React.useState('user@gmail.com');
   const [password, setPassword] = React.useState('123456');
@@ -75,7 +78,7 @@ const SignIn = ({navigation}) => {
       <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor="#FFFFFF"
+        backgroundColor={theme.colors.text}
         translucent={true}
       />
       <View style={[styles.mainContainer]}>

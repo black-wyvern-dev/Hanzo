@@ -8,12 +8,14 @@ import {
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import Separator from '../../Components/Separator';
+import { useTheme } from 'react-native-paper';
 
 import styles from './RankListStyle';
 
 // import { useGlobals } from '../../contexts/Global';
 
 const RankList = ({navigation}) => {
+  const theme = useTheme();
   const [musics, setMusics] = React.useState([
       {
         id: '1',
@@ -41,7 +43,7 @@ const RankList = ({navigation}) => {
       <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor="#FFFFFF"
+        backgroundColor={theme.colors.text}
         translucent={true}
       />
       <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>

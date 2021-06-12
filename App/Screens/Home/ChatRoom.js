@@ -9,11 +9,13 @@ import {
 import SafeAreaView from 'react-native-safe-area-view';
 import styles from './HomeStyle';
 import firestore from '@react-native-firebase/firestore';
+import { useTheme } from 'react-native-paper';
 import { Spinner } from 'native-base';
 // import { useGlobals } from '../../contexts/Global';
 import Separator from '../../Components/Separator';
 
 const ChatRoom = ({navigation}) => {
+  const theme = useTheme();
   const [threads, setThreads] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
@@ -48,7 +50,7 @@ const ChatRoom = ({navigation}) => {
       <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor="#FFFFFF"
+        backgroundColor={theme.colors.text}
         translucent={true}
       />
       <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>
