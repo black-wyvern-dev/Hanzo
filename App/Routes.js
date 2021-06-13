@@ -9,7 +9,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-
+import messaging from '@react-native-firebase/messaging';
 import { PreferencesContext } from './contexts/preferencesContext';
 
 import Main from './Screens/Main';
@@ -30,6 +30,31 @@ const Routes = () => {
     const toggleRTL = React.useCallback(() => {
       I18nManager.forceRTL(!rtl);
     }, [rtl]);
+    React.useEffect(() => {
+      // Assume a message-notification contains a "type" property in the data payload of the screen to open
+  
+      messaging().onNotificationOpenedApp(remoteMessage => {
+        console.log(
+          'Notification caused app to open from background state:',
+          remoteMessage.notification,
+        );
+        // navigation.navigate(remoteMessage.data.type);
+      });
+  
+      // Check whether an initial notification is available
+      messaging()
+        .getInitialNotification()
+        .then(remoteMessage => {
+          if (remoteMessage) {
+            console.log(
+              'Notification caused app to open from quit state:',
+              remoteMessage.notification,
+            );
+            // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
+          }
+          // setLoading(false);
+        });
+    }, []);
     const preferences = React.useMemo(
       () => ({
         toggleTheme,

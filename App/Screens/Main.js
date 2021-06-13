@@ -111,7 +111,7 @@ function CustomDrawerContent(props) {
           name={'close'}
           type='MaterialIcons'
           style={styles.drawerCloseIcon}
-          onPress={() => props.hideDrawer()}
+          onPress={() => props.navigation.hideDrawer()}
         />
         <Image
           source={{ uri: 'https://picsum.photos/200/200' }}
@@ -168,7 +168,7 @@ const Main = ({ navigation }) => {
       <Drawer.Navigator
         initialRouteName="HomePage"
         drawerStyle={styles.drawer}
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
+        drawerContent={({props}) => <CustomDrawerContent {...props} />}
         drawerContentOptions={{
           activeTintColor: '#e90000',
           itemStyle: { marginVertical: 0 },
