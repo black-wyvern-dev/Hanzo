@@ -111,7 +111,7 @@ function CustomDrawerContent(props) {
           name={'close'}
           type='MaterialIcons'
           style={styles.drawerCloseIcon}
-          onPress={() => props.navigation.hideDrawer()}
+          onPress={() => props.hideDrawer()}
         />
         <Image
           source={{ uri: 'https://picsum.photos/200/200' }}
@@ -164,11 +164,11 @@ function CustomDrawerContent(props) {
 
 const Main = ({ navigation }) => {
   return (
-    <SafeAreaProvider>
+    < SafeAreaProvider >
       <Drawer.Navigator
         initialRouteName="HomePage"
         drawerStyle={styles.drawer}
-        drawerContent={({props}) => <CustomDrawerContent {...props} />}
+        drawerContent={(props) => <CustomDrawerContent {...props} />}
         drawerContentOptions={{
           activeTintColor: '#e90000',
           itemStyle: { marginVertical: 0 },
@@ -181,7 +181,7 @@ const Main = ({ navigation }) => {
         <Drawer.Screen name="RankingPage" component={RankingPage} />
         <Drawer.Screen name="WalletPage" component={WalletPage} />
       </Drawer.Navigator>
-    </SafeAreaProvider>
+    </SafeAreaProvider >
   );
 }
 
