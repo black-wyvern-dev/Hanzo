@@ -117,7 +117,7 @@ function CustomDrawerContent(props) {
           source={{ uri: 'https://picsum.photos/200/200' }}
           style={styles.imageProfile}
         />
-        <Text style={styles.textName}>{userInfo.firstName + ' ' + userInfo.lastName}</Text>
+        <Text style={styles.textName}>{userInfo.first_name + ' ' + userInfo.last_name}</Text>
         <Text numberOfLines={1} style={styles.textEmail}>
           {userInfo.email}
         </Text>
@@ -164,7 +164,7 @@ function CustomDrawerContent(props) {
 
 const Main = ({ navigation }) => {
   return (
-    < SafeAreaProvider >
+    <SafeAreaProvider >
       <Drawer.Navigator
         initialRouteName="HomePage"
         drawerStyle={styles.drawer}

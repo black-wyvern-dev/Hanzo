@@ -41,6 +41,12 @@ export const reducer = (state, action) => {
         ...state,
         userInfo: action.fields,
       };
+    case 'setDeviceToken':
+      // console.log(action.fields);
+      return {
+        ...state,
+        deviceToken: action.fields,
+      };
     case 'setMusicList':
       // console.log(action.fields.data);
       return {
@@ -71,6 +77,7 @@ export const initialState = {
   userInfo: {},
   musicList: [],
   language: 'us',
+  deviceToken: {},
 };
 
 /**

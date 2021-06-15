@@ -29,15 +29,15 @@ import { useGlobals } from '../../contexts/Global';
 import styles from './SignInStyle';
 import color from 'color';
 
-const SignIn = ({navigation}) => {
+const SignIn = ({ navigation }) => {
   const theme = useTheme();
-  const [{ userInfo }, dispatch] = useGlobals();
+  const [{ userInfo, deviceToken }, dispatch] = useGlobals();
   const [userID, setUserID] = React.useState('user@gmail.com');
   const [password, setPassword] = React.useState('123456');
   const [showProgress, setShowProgress] = React.useState(false);
   const [showAlert, setShowAlert] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState('Unkown Error');
-  
+
   const closeAlert = () => {
     setShowAlert(false);
   }
@@ -52,8 +52,7 @@ const SignIn = ({navigation}) => {
         data,
         token,
         errors,
-      } = await login(userID, password);
-
+      } = await login(userID, password, deviceToken.token);
       dispatch({
         type: 'setUserInfo',
         fields: {
@@ -91,7 +90,7 @@ const SignIn = ({navigation}) => {
         </View>
         <Text style={[styles.title]}>Sign In</Text>
         <Text style={[styles.content]}>Hi there! Nice to see you again.</Text>
-        <View style={[styles.inputContainer, {marginBottom: 0}]}>
+        <View style={[styles.inputContainer, { marginBottom: 0 }]}>
           <Text style={[styles.label]}>Email</Text>
           <TextInput
             style={[styles.input]}
@@ -101,21 +100,21 @@ const SignIn = ({navigation}) => {
             value={userID}
           />
         </View>
-        <View style={[styles.inputContainer, {marginTop: 0}]}>
-        <Text style={[styles.label]}>Password</Text>
-        <TextInput
-          style={[styles.input]}
-          onChangeText={setPassword}
-          value={password}
-          placeholder=""
-          secureTextEntry={true}
+        <View style={[styles.inputContainer, { marginTop: 0 }]}>
+          <Text style={[styles.label]}>Password</Text>
+          <TextInput
+            style={[styles.input]}
+            onChangeText={setPassword}
+            value={password}
+            placeholder=""
+            secureTextEntry={true}
             autoCompleteType="password"
-        />
+          />
         </View>
         <TouchableOpacity
           style={[styles.button, styles.loginBtn]}
           onPress={() => _handleContinue()}>
-        <Text style={[styles.btnText]}>Sign In</Text>
+          <Text style={[styles.btnText]}>Sign In</Text>
         </TouchableOpacity>
         <Text style={[styles.content, styles.hintText]}>or use one of your social profiles</Text>
         <View style={[styles.btnContainer]}>
@@ -124,7 +123,7 @@ const SignIn = ({navigation}) => {
             onPress={() => navigation.navigate('SignIn')}>
             <SocialIcon
               style={styles.btnIcon}
-              iconSize= {18}
+              iconSize={18}
               raised={false}
               type='twitter'
             />
@@ -135,7 +134,7 @@ const SignIn = ({navigation}) => {
             onPress={() => navigation.navigate('SignIn')}>
             <SocialIcon
               style={styles.btnIcon}
-              iconSize= {18}
+              iconSize={18}
               raised={false}
               type='facebook'
             />
@@ -156,11 +155,11 @@ const SignIn = ({navigation}) => {
         </View>
       </View>
       <Overlay isVisible={showAlert} onBackdropPress={() => closeAlert()}>
-        <Text style={{margin: 15}}>{errorMsg}</Text>
+        <Text style={{ margin: 15 }}>{errorMsg}</Text>
         <Button title='Close' onPress={() => closeAlert()} />
       </Overlay>
       <Overlay isVisible={showProgress} onBackdropPress={() => setShowProgress(false)}>
-        <Spinner style={{margin: 15}}/>
+        <Spinner style={{ margin: 15 }} />
       </Overlay>
     </SafeAreaView>
   );

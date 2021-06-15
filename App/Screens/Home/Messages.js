@@ -6,27 +6,27 @@ import auth from '@react-native-firebase/auth'
 import { useGlobals } from '../../contexts/Global';
 
 export default function Messages({ route }) {
-  const [{ userInfo }, dispatch] = useGlobals();
-  const { thread } = route.params
-  const [messages, setMessages] = useState([
-    {
-      _id: 0,
-      text: 'thread created',
-      createdAt: new Date().getTime(),
-      system: true
-    },
-    {
-      _id: 1,
-      text: 'hello!',
-      createdAt: new Date().getTime(),
-      user: {
-        _id: 2,
-        name: 'Demo'
-      }
-    }
-  ])
+    const [{ userInfo }, dispatch] = useGlobals();
+    const { thread } = route.params
+    const [messages, setMessages] = useState([
+        {
+            _id: 0,
+            text: 'thread created',
+            createdAt: new Date().getTime(),
+            system: true
+        },
+        {
+            _id: 1,
+            text: 'hello!',
+            createdAt: new Date().getTime(),
+            user: {
+                _id: 2,
+                name: 'Demo'
+            }
+        }
+    ])
 
-  async function handleSend(messages = []) {
+    async function handleSend(messages = []) {
         const text = messages[0].text
         console.log(userInfo.id);
         console.log(messages);
@@ -39,8 +39,8 @@ export default function Messages({ route }) {
                 text,
                 createdAt: new Date().getTime(),
                 user: {
-                _id: userInfo.id,
-                displayName: userInfo.firstName + ' ' + userInfo.lastName,
+                    _id: userInfo.id,
+                    displayName: userInfo.first_name + ' ' + userInfo.last_name,
                 }
             })
         await firestore()
@@ -48,10 +48,10 @@ export default function Messages({ route }) {
             .doc(thread._id)
             .set(
                 {
-                latestMessage: {
-                    text,
-                    createdAt: new Date().getTime()
-                }
+                    latestMessage: {
+                        text,
+                        createdAt: new Date().getTime()
+                    }
                 },
                 { merge: true }
             )
@@ -59,45 +59,45 @@ export default function Messages({ route }) {
     }
 
     useEffect(() => {
-    const unsubscribeListener = firestore()
-        .collection('MESSAGE_THREADS')
-        .doc(thread._id)
-        .collection('MESSAGES')
-        .orderBy('createdAt', 'desc')
-        .onSnapshot(querySnapshot => {
-        const messages = querySnapshot.docs.map(doc => {
-            const firebaseData = doc.data()
+        const unsubscribeListener = firestore()
+            .collection('MESSAGE_THREADS')
+            .doc(thread._id)
+            .collection('MESSAGES')
+            .orderBy('createdAt', 'desc')
+            .onSnapshot(querySnapshot => {
+                const messages = querySnapshot.docs.map(doc => {
+                    const firebaseData = doc.data()
 
-            const data = {
-            _id: doc.id,
-            text: '',
-            createdAt: new Date().getTime(),
-            ...firebaseData
-            }
+                    const data = {
+                        _id: doc.id,
+                        text: '',
+                        createdAt: new Date().getTime(),
+                        ...firebaseData
+                    }
 
-            if (!firebaseData.system) {
-            data.user = {
-                ...firebaseData.user,
-                name: firebaseData.user.displayName
-            }
-            }
+                    if (!firebaseData.system) {
+                        data.user = {
+                            ...firebaseData.user,
+                            name: firebaseData.user.displayName
+                        }
+                    }
 
-            return data
-        })
+                    return data
+                })
 
-        setMessages(messages)
-        })
+                setMessages(messages)
+            })
 
-    return () => unsubscribeListener()
+        return () => unsubscribeListener()
     }, [])
 
     return (
-    <GiftedChat
-        messages={messages}
-        onSend={handleSend}
-        user={{
-            _id: userInfo.id
-        }}
-    />
+        <GiftedChat
+            messages={messages}
+            onSend={handleSend}
+            user={{
+                _id: userInfo.id
+            }}
+        />
     )
 }

@@ -1,46 +1,18 @@
 import api from '../Config/baseApi';
 
-export const login = (email = '', password = '') => {
-  console.log(email, password);
+export const login = (email = '', password = '', token = '') => {
+  // console.log(token);
+  // console.log(email, password);
   return api
-    .post('api/login', { email, password })
+    .post('api/login', { email, password, token })
     .then((resp) => {
       let rspData = resp.data;
-      if (!rspData || !rspData.success) {
-        // console.log(typeof(rspData));
-        rspData = JSON.parse(resp.data.concat('}'));
-        // console.log(rspData);
-        // return {};
-      }
-      const data = rspData.success.auth;
-      const token = rspData.success.token;
-      // const branch_name = rspData.success.branch_name;
-      // const company_info = rspData.success.company_info;
-      // const template = rspData.success.current_template;
-      // const survey = rspData.success.current_survey;
-      // const header_color = rspData.success.header_color;
-      // const footer_color = rspData.success.footer_color;
-      // const background_color = rspData.success.background_color;
-      // const questions = rspData.success.questions;
-      // const languages = rspData.success.languages;
-      // const ratings = rspData.success.ratings;
-      // const brands = rspData.success.brands;
-      const message = rspData.success.message;
-      console.log('responsed data : ', rspData.success);
+      // console.log(rspData);
+      const data = rspData.auth;
+      const token = rspData.token;
+      console.log('responsed data : ', rspData);
       return {
         data,
-        // branch_name,
-        // company_info,
-        // template,
-        // survey,
-        // languages,
-        // header_color,
-        // footer_color,
-        // background_color,
-        // questions,
-        // ratings,
-        // brands,
-        message,
         token,
       };
     })
@@ -55,8 +27,8 @@ export const logo_request = () => {
     .post('api/logo_request')
     .then((resp) => {
       let logo;
-      if (resp.data.success) logo = resp.data.success.logo;
-      console.log('okok'+logo);
+      if (resp.data.success) logo = resp.data.logo;
+      console.log('okok' + logo);
       return {
         logo,
       };
