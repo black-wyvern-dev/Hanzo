@@ -6,24 +6,55 @@ import {
   Button
 } from 'react-native-paper';
 import { Icon } from 'native-base';
+import { postShill } from '../../apis/update';
+import { useGlobals } from '../../contexts/Global';
+import { Overlay } from 'react-native-elements';
+import { Spinner } from 'native-base';
 
 export const ShillPostForm = () => {
   const theme = useTheme();
+  const [{ userInfo }, dispatch] = useGlobals();
   const [name, setName] = React.useState('');
   const [id, setId] = React.useState('');
   const [content, setContent] = React.useState('');
   const [avatar, setAvatar] = React.useState('https://picsum.photos/100');
   const [image, setImage] = React.useState('https://pbs.twimg.com/media/EOUrCOcWAAA71rA?format=png&name=small');
+  const [showProgress, setShowProgress] = React.useState(false);
+  const [showAlert, setShowAlert] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState('Unkown Error');
+  
+  const closeAlert = () => {
+    setShowAlert(false);
+  }
 
-  const postBtnHandle = () => {
-    console.log({
-        name,
-        id,
-        content,
-        avatar,
-        image
-    });
-    if(name=='' || id == '' || content == '')return;
+  const postBtnHandle = async() => {
+    try{
+        if(name=='' || id == '' || content == '') {
+            console.log('Shill Info is invalid. Try again.');
+            setErrorMsg('Shill Info is invalid. Try again.');
+            setShowAlert(true);
+            return;
+        }
+        setShowProgress(true);
+        const {
+            errors,
+        } = await postShill({
+            name,
+            id,
+            content,
+            avatar,
+            image
+        }, userInfo.token ?? '');
+        setShowProgress(false);
+        if (!errors) {
+            console.log('Post succeed');
+        } else {
+            setErrorMsg(errors);
+            setShowAlert(true);
+        }
+    } catch(err){
+        
+    } finally {}
   }
 
   return (
@@ -93,6 +124,19 @@ export const ShillPostForm = () => {
       >
         Post a message
       </Button>
+      <Overlay isVisible={showAlert} onBackdropPress={() => closeAlert()}>
+        <Text style={{margin: 15}}>{errorMsg}</Text>
+        <Button
+            style={[styles.button, {backgroundColor: theme.colors.primary}]}
+            onPress={() => closeAlert()}
+            labelStyle={{ color: 'white' }}
+        >
+            Close
+        </Button>
+      </Overlay>
+      <Overlay isVisible={showProgress} onBackdropPress={() => setShowProgress(false)}>
+        <Spinner style={{margin: 15}}/>
+      </Overlay>
     </View>
   );
 };
