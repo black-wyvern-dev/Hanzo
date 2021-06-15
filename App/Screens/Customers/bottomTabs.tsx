@@ -10,6 +10,7 @@ import { Feed } from './feed';
 import { Message } from './message';
 import { Notifications } from './notifications';
 import { StackNavigatorParamlist } from './types';
+import { useGlobals } from '../../contexts/Global';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -18,6 +19,8 @@ type Props = {
 };
 
 export const BottomTabs = (props: Props) => {
+  const [{ userInfo }, dispatch] = useGlobals();
+
   const routeName = props.route;//.state
     //? props.route.state.routes[props.route.state.index].name
    // : 'Feed';
@@ -70,14 +73,18 @@ export const BottomTabs = (props: Props) => {
             tabBarColor,
           }}
         />
-        <Tab.Screen
-          name="Messages"
-          component={Message}
-          options={{
-            tabBarIcon: 'message-text-outline',
-            tabBarColor,
-          }}
-        />
+        {
+          userInfo.role == '1'?
+          <Tab.Screen
+            name="Messages"
+            component={Message}
+            options={{
+              tabBarIcon: 'message-text-outline',
+              tabBarColor,
+            }}
+          />
+          : <></>
+        }
       </Tab.Navigator>
       <Portal>
         <FAB

@@ -18,7 +18,7 @@ const GameLayer = ({ navigation, route }) => {
       <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor={theme.colors.text}
+        backgroundColor="#FFFFFF"
         translucent={true}
       />
     </SafeAreaView>

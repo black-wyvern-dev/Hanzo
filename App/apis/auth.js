@@ -22,6 +22,28 @@ export const login = (email = '', password = '', token = '') => {
     });
 };
 
+export const register = ({ email = '', password = '', firstName = '', lastName = '' }) => {
+  return api
+    .post('api/register', { email, password, firstName, lastName, password_confirmation: password })
+    .then((resp) => {
+      let rspData = resp.data;
+      if (!rspData || !rspData.success) {
+        rspData = JSON.parse(resp.data.concat('}'));
+        // console.log(rspData);
+        // return {};
+      }
+      const token = rspData.success.token;
+      console.log('responsed data : ', rspData.success);
+      return {
+        token,
+      };
+    })
+    .catch((error) => {
+      console.log('Axios Error :' + error.message);
+      return { errors: 'ERROR: ' + error.message };
+    });
+};
+
 export const logo_request = () => {
   return api
     .post('api/logo_request')

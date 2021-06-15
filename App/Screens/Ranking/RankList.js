@@ -70,7 +70,7 @@ const RankList = ({ navigation }) => {
       <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor={theme.colors.text}
+        backgroundColor="#FFFFFF"
         translucent={true}
       />
       <Picker

@@ -18,7 +18,7 @@ const RankDetail = ({ navigation, route }) => {
       <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor={theme.colors.text}
+        backgroundColor="#FFFFFF"
         translucent={true}
       />
       <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>  
