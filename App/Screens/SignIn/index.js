@@ -32,7 +32,7 @@ import color from 'color';
 const SignIn = ({navigation}) => {
   const theme = useTheme();
   const [{ userInfo }, dispatch] = useGlobals();
-  const [userID, setUserID] = React.useState('user@gmail.com');
+  const [userID, setUserID] = React.useState('admin@gmail.com');
   const [password, setPassword] = React.useState('123456');
   const [showProgress, setShowProgress] = React.useState(false);
   const [showAlert, setShowAlert] = React.useState(false);
@@ -41,9 +41,6 @@ const SignIn = ({navigation}) => {
   const closeAlert = () => {
     setShowAlert(false);
   }
-
-  React.useEffect(() => {
-  }, []);
 
   const _handleContinue = async () => {
     try {
@@ -54,17 +51,24 @@ const SignIn = ({navigation}) => {
         errors,
       } = await login(userID, password);
 
-      dispatch({
-        type: 'setUserInfo',
-        fields: {
-          ...data,
-          token,
-        },
-      });
       setShowProgress(false);
       if (token) {
-        console.log('SignIn Succeed');
-        navigation.navigate('Main');
+        console.log(data.active);
+        if (data.active != '1') {
+          console.log('User is not approved');
+          setErrorMsg('User is not approved');
+          setShowAlert(true);
+        } else {
+          console.log('SignIn Succeed');
+          dispatch({
+            type: 'setUserInfo',
+            fields: {
+              ...data,
+              token,
+            },
+          });
+          navigation.navigate('Main');
+        }
       } else {
         setErrorMsg(errors);
         setShowAlert(true);
@@ -78,7 +82,7 @@ const SignIn = ({navigation}) => {
       <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor={theme.colors.text}
+        backgroundColor='#FFFFFF'
         translucent={true}
       />
       <View style={[styles.mainContainer]}>
