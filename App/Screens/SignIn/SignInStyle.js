@@ -16,8 +16,15 @@ const styles = StyleSheet.create({
   logo: {
     width: 100,
     height: 100,
-    marginBottom: 20,
+    marginBottom: -20,
     alignSelf: 'center',
+  },
+  logoTitle: {
+    textAlign: 'center',
+    fontSize: 26,
+    fontFamily: 'Moyko',
+    color: '#F66',
+    margin: 20
   },
   title: {
     fontSize: 20,

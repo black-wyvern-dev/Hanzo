@@ -11,6 +11,7 @@ import {
   List,
   StyleSheet,
   Platform,
+  ImageBackground,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -86,7 +87,7 @@ function CustomDrawerContent(props) {
     },
     {
       drawerLabel: 'SignOut',
-      drawerIcon: 'logout',
+      drawerIcon: 'keyboard-return',
       routeName: 'SignIn',
       group: '',
     },
@@ -105,60 +106,67 @@ function CustomDrawerContent(props) {
   };
 
   return (
-    <DrawerContentScrollView {...props}>
-      <View style={styles.containerHeader}>
-        <Icon
-          name={'close'}
-          type='MaterialIcons'
-          style={styles.drawerCloseIcon}
-          onPress={() => props.hideDrawer()}
-        />
-        <Image
-          source={{ uri: 'https://picsum.photos/200/200' }}
-          style={styles.imageProfile}
-        />
-        <Text style={styles.textName}>{userInfo.first_name + ' ' + userInfo.last_name}</Text>
-        <Text numberOfLines={1} style={styles.textEmail}>
-          {userInfo.email}
-        </Text>
-      </View>
-      <View style={styles.containerContent}>
-        <FlatList
-          data={drawerItems}
-          keyExtractor={(item, index) => String(index + JSON.stringify(item))}
-          renderItem={({ item, index }) => (
-            <View>
-              <ItemHeader item={item} index={index} />
-              <View
-                style={styles.itemContainer}
-              >
-                <DrawerItem
-                  label={item.drawerLabel}
-                  icon={({ color, size }) => (
-                    <Icon
-                      name={item.drawerIcon}
-                      type='MaterialIcons'
-                      style={styles.drawerIcon}
-                    />
-                  )}
-                  style={styles.textDrawer}
-                  labelStyle={styles.textDrawerItem}
-                  onPress={() => {
-                    setDrawerSelected(index);
-                    props.navigation.navigate(item.routeName);
-                  }}
-                />
-                <Icon
-                  name={'navigate-next'}
-                  type='MaterialIcons'
-                  style={styles.drawerSuffixIcon}
-                />
+    <ImageBackground source={require('../Assets/Images/hanzo-background.jpg')} style={{ width: "100%", height: "100%" }}>
+      <DrawerContentScrollView {...props}>
+        <View style={[styles.containerHeader]}>
+          <Icon
+            name={'close'}
+            type='MaterialIcons'
+            style={styles.drawerCloseIcon}
+            onPress={() => props.hideDrawer()}
+          />
+          <Image
+            source={require('../Assets/Images/hanzo-logo.gif')}
+            style={styles.imageProfile}
+          />
+          <Text style={[styles.textName, {
+            textAlign: 'center',
+            fontSize: 18,
+            fontFamily: 'Moyko',
+            color: '#FFF',
+          }]}>{/*userInfo.first_name + ' ' + userInfo.last_name*/'Sensei Hanzo'}</Text>
+          {/* <Text numberOfLines={1} style={styles.textEmail}>
+            {userInfo.email}
+          </Text> */}
+        </View>
+        <View style={styles.containerContent}>
+          <FlatList
+            data={drawerItems}
+            keyExtractor={(item, index) => String(index + JSON.stringify(item))}
+            renderItem={({ item, index }) => (
+              <View>
+                <ItemHeader item={item} index={index} />
+                <View
+                  style={styles.itemContainer}
+                >
+                  <DrawerItem
+                    label={item.drawerLabel}
+                    icon={({ color, size }) => (
+                      <Icon
+                        name={item.drawerIcon}
+                        type='MaterialIcons'
+                        style={[styles.drawerIcon, { color: '#FFF' }]}
+                      />
+                    )}
+                    style={[styles.textDrawer]}
+                    labelStyle={[styles.textDrawerItem, { color: '#FFF' }]}
+                    onPress={() => {
+                      setDrawerSelected(index);
+                      props.navigation.navigate(item.routeName);
+                    }}
+                  />
+                  <Icon
+                    name={'navigate-next'}
+                    type='MaterialIcons'
+                    style={[styles.drawerSuffixIcon, { color: '#FFF' }]}
+                  />
+                </View>
               </View>
-            </View>
-          )}
-        />
-      </View>
-    </DrawerContentScrollView>
+            )}
+          />
+        </View>
+      </DrawerContentScrollView>
+    </ImageBackground>
   );
 }
 

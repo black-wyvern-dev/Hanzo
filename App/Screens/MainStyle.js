@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 70,
+    marginBottom: -10,
   },
   textName: {
     marginTop: 15,
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
   },
   drawerCloseIcon: {
     fontSize: 22,
-    color: '#f66',
+    color: '#fff',
     position: 'absolute',
     top: 15,
     left: 15,

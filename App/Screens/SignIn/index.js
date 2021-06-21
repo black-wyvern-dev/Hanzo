@@ -96,9 +96,10 @@ const SignIn = ({ navigation }) => {
           <Image
             style={[styles.logo]}
             resizeMode='contain'
-            source={require('../../Assets/Images/logo.png')}
+            source={require('../../Assets/Images/hanzo-logo.gif')}
           />
         </View>
+        <Text style={[styles.logoTitle]}>Sensei Hanzo</Text>
         <Text style={[styles.title]}>Sign In</Text>
         <Text style={[styles.content]}>Hi there! Nice to see you again.</Text>
         <View style={[styles.inputContainer, { marginBottom: 0 }]}>

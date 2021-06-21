@@ -50,6 +50,7 @@
 		91231570327B4D66A7E37769 /* bradhitc.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57539778E0484BF5AE71735A /* bradhitc.ttf */; };
 		CC2A257673FD4E91B76D1002 /* BradleyHandITCTT-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C8D6F377E61475D898AE021 /* BradleyHandITCTT-Bold.ttf */; };
 		9A2BC5CBD28D4950BA3F37DD /* Bradleys Pen.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC40DE803CBD4091AE336A01 /* Bradleys Pen.ttf */; };
+		D0653493E909481491060D0D /* Moyko.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA546C752CBC4121B8C8130C /* Moyko.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		57539778E0484BF5AE71735A /* bradhitc.ttf */ = {isa = PBXFileReference; name = "bradhitc.ttf"; path = "../App/Assets/Fonts/bradhitc.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		5C8D6F377E61475D898AE021 /* BradleyHandITCTT-Bold.ttf */ = {isa = PBXFileReference; name = "BradleyHandITCTT-Bold.ttf"; path = "../App/Assets/Fonts/BradleyHandITCTT-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		CC40DE803CBD4091AE336A01 /* Bradleys Pen.ttf */ = {isa = PBXFileReference; name = "Bradleys Pen.ttf"; path = "../App/Assets/Fonts/Bradleys Pen.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DA546C752CBC4121B8C8130C /* Moyko.ttf */ = {isa = PBXFileReference; name = "Moyko.ttf"; path = "../App/Assets/Fonts/Moyko.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +244,7 @@
 				57539778E0484BF5AE71735A /* bradhitc.ttf */,
 				5C8D6F377E61475D898AE021 /* BradleyHandITCTT-Bold.ttf */,
 				CC40DE803CBD4091AE336A01 /* Bradleys Pen.ttf */,
+				DA546C752CBC4121B8C8130C /* Moyko.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				91231570327B4D66A7E37769 /* bradhitc.ttf in Resources */,
 				CC2A257673FD4E91B76D1002 /* BradleyHandITCTT-Bold.ttf in Resources */,
 				9A2BC5CBD28D4950BA3F37DD /* Bradleys Pen.ttf in Resources */,
+				D0653493E909481491060D0D /* Moyko.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
