@@ -16,22 +16,29 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginBottom: 10,
-    color: '#555',
+    color: 'rgb(234,164,67)',
+    textShadowOffset: {width: 2, height: 2},
+    textShadowRadius: 5,
+    textShadowColor: 'rgba(0,0,0,0.75)',
   },
   content: {
-    color: '#888',
+    color: 'rgb(234,164,67)',
   },
   inputContainer: {
     marginVertical: 15,
   },
   input: {
-    borderBottomWidth: 2,
-    borderBottomColor: '#DDD',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgb(234,164,67)',
+    color: 'rgb(234, 164, 67)',
     paddingBottom: 1,
     marginBottom: 10,
   },
   label: {
-    color: 'red',
+    color: 'rgb(234,164,67)',
+    textShadowOffset: {width: 2, height: 2},
+    textShadowRadius: 5,
+    textShadowColor: 'rgba(0,0,0,0.75)',
     fontSize: 14,
   },
   button: {
@@ -42,13 +49,13 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   signUpBtn: {
-    backgroundColor: '#FBB',
+    backgroundColor: 'rgb(184, 114, 17)',
   },
   signUpActive: {
-    backgroundColor: '#F66',
+    backgroundColor: 'rgb(234, 164, 67)',
   },
   btnText: {
-    color: 'white',
+    color: '#4A0F0F',
     fontSize: 12,
     fontWeight: 'bold',
   },
@@ -58,7 +65,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   signUp: {
-    color: '#F66',
+    color: 'rgb(234,164,67)',
+    textShadowOffset: {width: 2, height: 2},
+    textShadowRadius: 5,
+    textShadowColor: 'rgba(0,0,0,0.75)',
   },
   checkContainer: {
     flexDirection: 'row',
@@ -67,8 +77,8 @@ const styles = StyleSheet.create({
   checkBox: {
     marginRight: 10,
     marginTop: 3,
-    backgroundColor: '#F66',
-    color: 'white',
+    backgroundColor: 'rgb(234, 164, 67)',
+    color: '#4A0F0F',
     height: 15,
     width: 15,
     fontSize: 14,
@@ -76,7 +86,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   checkBoxActive: {
-    color: '#F66',
+    color: 'rgb(234,164,67)',
   },
   checkTextContainer: {
     flex: 1,
@@ -84,8 +94,8 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   link: {
-    color: '#F66',
-  },
+    color: 'white',
+  }
 });
 
 export default styles;

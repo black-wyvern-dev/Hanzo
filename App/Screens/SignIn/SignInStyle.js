@@ -23,28 +23,38 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 26,
     fontFamily: 'Moyko',
-    color: '#F66',
+    color: 'rgb(234,164,67)',
+    textShadowOffset: {width: 2, height: 2},
+    textShadowRadius: 5,
+    textShadowColor: 'rgba(0,0,0,0.75)',
     margin: 20
   },
   title: {
     fontSize: 20,
     marginBottom: 10,
-    color: '#555',
+    color: 'rgb(234,164,67)',
+    textShadowOffset: {width: 2, height: 2},
+    textShadowRadius: 5,
+    textShadowColor: 'rgba(0,0,0,0.75)',
   },
   content: {
-    color: '#888',
+    color: 'rgb(234,164,67)',
   },
   inputContainer: {
     marginVertical: 15,
   },
   input: {
-    borderBottomWidth: 2,
-    borderBottomColor: '#DDD',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgb(234,164,67)',
+    color: 'rgb(234,164,67)',
     paddingBottom: 1,
     marginBottom: 10,
   },
   label: {
-    color: 'red',
+    color: 'rgb(234,164,67)',
+    textShadowOffset: {width: 2, height: 2},
+    textShadowRadius: 5,
+    textShadowColor: 'rgba(0,0,0,0.75)',
     fontSize: 14,
   },
   button: {
@@ -55,13 +65,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   loginBtn: {
-    backgroundColor: '#F66',
-  },
-  signUpBtn: {
-    backgroundColor: '#FBB',
-  },
-  signUpActive: {
-    backgroundColor: '#F66',
+    backgroundColor: 'rgb(234,164,67)',
   },
   btnIcon: {
     backgroundColor: 'transparent',
@@ -69,7 +73,7 @@ const styles = StyleSheet.create({
     width: 20,
   },
   btnText: {
-    color: 'white',
+    color: '#4A0F0F',
     fontSize: 12,
     fontWeight: 'bold',
   },
@@ -100,7 +104,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   signUp: {
-    color: '#F66',
+    color: 'rgb(234,164,67)',
+    textShadowOffset: {width: 2, height: 2},
+    textShadowRadius: 2,
+    textShadowColor: '#4A0F0F',
   },
 });
 

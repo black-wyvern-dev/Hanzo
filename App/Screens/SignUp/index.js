@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   FlatList,
   List,
+  ImageBackground,
   StyleSheet,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -76,11 +77,12 @@ const SignUp = ({navigation}) => {
   }
 
   return (
+    <ImageBackground source={require('../../Assets/Images/hanzo-background.jpg')} style={{ width: "100%", height: "100%" }}>
     <SafeAreaView style={[styles.container]}>
       <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor='#FFFFFF'
+        backgroundColor="rgb(234, 164, 67)"
         translucent={true}
       />
       <View style={[styles.mainContainer]}>
@@ -171,6 +173,7 @@ const SignUp = ({navigation}) => {
         <Spinner style={{margin: 15}}/>
       </Overlay>
     </SafeAreaView>
+    </ImageBackground>
   );
 };
 

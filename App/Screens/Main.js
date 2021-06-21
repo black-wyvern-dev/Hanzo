@@ -119,12 +119,7 @@ function CustomDrawerContent(props) {
             source={require('../Assets/Images/hanzo-logo.gif')}
             style={styles.imageProfile}
           />
-          <Text style={[styles.textName, {
-            textAlign: 'center',
-            fontSize: 18,
-            fontFamily: 'Moyko',
-            color: '#FFF',
-          }]}>{/*userInfo.first_name + ' ' + userInfo.last_name*/'Sensei Hanzo'}</Text>
+          <Text style={[styles.textName]}>{/*userInfo.first_name + ' ' + userInfo.last_name*/'Sensei Hanzo'}</Text>
           {/* <Text numberOfLines={1} style={styles.textEmail}>
             {userInfo.email}
           </Text> */}
@@ -145,11 +140,11 @@ function CustomDrawerContent(props) {
                       <Icon
                         name={item.drawerIcon}
                         type='MaterialIcons'
-                        style={[styles.drawerIcon, { color: '#FFF' }]}
+                        style={[styles.drawerIcon]}
                       />
                     )}
                     style={[styles.textDrawer]}
-                    labelStyle={[styles.textDrawerItem, { color: '#FFF' }]}
+                    labelStyle={[styles.textDrawerItem]}
                     onPress={() => {
                       setDrawerSelected(index);
                       props.navigation.navigate(item.routeName);
@@ -158,7 +153,7 @@ function CustomDrawerContent(props) {
                   <Icon
                     name={'navigate-next'}
                     type='MaterialIcons'
-                    style={[styles.drawerSuffixIcon, { color: '#FFF' }]}
+                    style={[styles.drawerSuffixIcon]}
                   />
                 </View>
               </View>

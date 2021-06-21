@@ -95,7 +95,7 @@ const GameList = ({ navigation }) => {
       <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor="#FFFFFF"
+        backgroundColor="rgb(234, 164, 67)"
         translucent={true}
       />
       {example2}

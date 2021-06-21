@@ -47,7 +47,7 @@ const CreateChatRoom = ({navigation}) => {
       <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor="#FFFFFF"
+        backgroundColor="rgb(234, 164, 67)"
         translucent={true}
       />
       <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>

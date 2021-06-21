@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   FlatList,
   List,
+  ImageBackground,
   StyleSheet,
 } from 'react-native';
 import { Button, Overlay } from 'react-native-elements';
@@ -84,11 +85,12 @@ const SignIn = ({ navigation }) => {
   };
 
   return (
+    <ImageBackground source={require('../../Assets/Images/hanzo-background.jpg')} style={{ width: "100%", height: "100%" }}>
     <SafeAreaView style={[styles.container]}>
       <StatusBar
         barStyle="dark-content"
         hidden={false}
-        backgroundColor='#FFFFFF'
+        backgroundColor="rgb(234, 164, 67)"
         translucent={true}
       />
       <View style={[styles.mainContainer]}>
@@ -139,7 +141,7 @@ const SignIn = ({ navigation }) => {
               raised={false}
               type='twitter'
             />
-            <Text style={[styles.btnText]}>Twitter</Text>
+            <Text style={[styles.btnText, {color: "white"}]}>Twitter</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, styles.facebookBtn]}
@@ -150,7 +152,7 @@ const SignIn = ({ navigation }) => {
               raised={false}
               type='facebook'
             />
-            <Text style={[styles.btnText]}>Facebook</Text>
+            <Text style={[styles.btnText, {color: "white"}]}>Facebook</Text>
           </TouchableOpacity>
         </View>
         <View style={[styles.actionContainer]}>
@@ -170,10 +172,14 @@ const SignIn = ({ navigation }) => {
         <Text style={{ margin: 15 }}>{errorMsg}</Text>
         <Button title='Close' onPress={() => closeAlert()} />
       </Overlay>
-      <Overlay isVisible={showProgress} onBackdropPress={() => setShowProgress(false)}>
-        <Spinner style={{ margin: 15 }} />
+      <Overlay isVisible={showProgress}
+        overlayBackgroundColor= 'rgb(234,164,67)'
+        onBackdropPress={() => setShowProgress(false)}
+        >
+        <Spinner style={{ margin: 15}} />
       </Overlay>
     </SafeAreaView>
+    </ImageBackground>
   );
 };
 

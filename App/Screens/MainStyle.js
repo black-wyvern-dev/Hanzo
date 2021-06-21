@@ -30,12 +30,15 @@ const styles = StyleSheet.create({
   textName: {
     marginTop: 15,
     fontSize: 16,
-    color: 'black',
+    textAlign: 'center',
+    fontSize: 18,
+    fontFamily: 'Moyko',
+    color: 'rgb(234, 164, 67)',
   },
-  textEmail: {
-    fontSize: 12,
-    color: 'gray',
-  },
+  // textEmail: {
+  //   fontSize: 12,
+  //   color: 'gray',
+  // },
   containerContent: {
     flex: 1,
   },
@@ -45,7 +48,7 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: 'rgb(234, 164, 67)',
     marginVertical: 25,
   },
   textDrawer: {
@@ -58,15 +61,15 @@ const styles = StyleSheet.create({
   },
   textDrawerItem: {
     fontSize: 13,
-    color: 'black',
+    color: 'rgb(234, 164, 67)',
     marginLeft: -20,
   },
   drawerIcon: {
-    color: 'lightgray',
+    color: 'rgb(234, 164, 67)',
     fontSize: 20,
   },
   drawerSuffixIcon: {
-    color: 'lightgray',
+    color: 'rgb(234, 164, 67)',
     fontSize: 16,
     position: 'absolute',
     right: 20,

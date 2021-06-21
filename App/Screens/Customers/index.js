@@ -36,7 +36,7 @@ const CustomerPage = ({navigation}) => {
           return (
             <Appbar.Header
               theme={{ colors: { primary: theme.colors.surface } }}
-              style={{marginTop: 30}}
+              style={{marginTop: 30, backgroundColor: 'rgb(234, 164, 67)'}}
             >
               {title !== 'Feed' ? (
                 <Appbar.BackAction
@@ -53,7 +53,12 @@ const CustomerPage = ({navigation}) => {
                   <Icon
                     name='home'
                     type='MaterialIcons'
-                    style={{fontSize: 20, marginRight: 10, color: theme.colors.primary}}
+                    style={{
+                      fontSize: 20,
+                      marginRight: 10,
+                      // color: theme.colors.primary
+                      color: '#4F0F0F',
+                      }}
                     onPress={() => {
                       superNavigation.openDrawer();
                     }}
@@ -72,7 +77,8 @@ const CustomerPage = ({navigation}) => {
                   fontSize: 26,
                   fontFamily: 'Bradleys Pen',
                   // fontWeight: 'bold',
-                  color: theme.colors.primary,
+                  // color: theme.colors.primary,
+                  color: '#4F0F0F',
                   alignSelf: 'center',
                 }}
               />
