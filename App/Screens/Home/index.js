@@ -48,7 +48,7 @@ const HomePage = ({navigation}) => {
                 <TouchableOpacity
                   style={{ marginLeft: 10 }}
                   onPress={() => {
-                    superNavigation.openDrawer();
+                    // superNavigation.openDrawer();
                   }}
                 >
                   <Icon
