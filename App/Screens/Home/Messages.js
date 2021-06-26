@@ -20,6 +20,7 @@ import { Icon } from 'native-base';
 import {Appbar} from 'react-native-paper';
 import SafeAreaView from 'react-native-safe-area-view';
 import { useGlobals } from '../../contexts/Global';
+import { postChatRes } from '../../apis/chatres';
 
 const ImagePicker = require("react-native-image-picker");
 
@@ -71,6 +72,8 @@ export default function Messages({ navigation, route }) {
         IncludeBase64: true,
         AudioEncodingBitRate: 32000
     });
+    // const [currentFile, setCurrentFile] = useState(undefined);
+    // const [progress, setProgress] = useState(0);
     
     React.useLayoutEffect(() => {
         navigation.setOptions({headerShown: false});
@@ -93,6 +96,25 @@ export default function Messages({ navigation, route }) {
             return result === true || result === PermissionsAndroid.RESULTS.GRANTED;
         });
     }
+
+    const progressCallback = progressEvent => {
+        const percentFraction = progressEvent.loaded / progressEvent.total;
+        const percent = Math.floor(percentFraction * 100);
+        // if (!progressFlag.includes('size')) {
+        //     progressFlag.push('size');
+        //     dispatch(S3Reducer.setUploadFileSize(progressEvent.total / 1000));
+        // }
+        console.log(`UploadFileSize: ${progressEvent.total / 1000}`);
+        if (percent % 10 === 0 && !progressFlag.includes(percent)) {
+            // progressFlag.push(percent);
+            // dispatch(S3Reducer.setUploadProgress(percentFraction));
+            console.log(`${precent}  ${percentFraction}`);
+        }
+        if (percentFraction === 1) {
+            // dispatch(S3Reducer.setUploadStatus('processing'));
+            console.log('processing');
+        }
+    };
 
     async function handleSend(messages = []) {
         const text = messages[0].text
@@ -190,18 +212,18 @@ export default function Messages({ navigation, route }) {
             allowsEditing: true,
             noData: true
         };
-        ImagePicker.launchImageLibrary(options, response => {
+        ImagePicker.launchImageLibrary(options, async response => {
             console.log("Response = ", response);
             if (response.didCancel) {
                 // do nothing
             } else if (response.error) {
                 // alert error
             } else {
-                const { uri } = response;
-                // const extensionIndex = uri.lastIndexOf(".");
-                // const extension = uri.slice(extensionIndex + 1);
-                // const allowedExtensions = ["jpg", "jpeg", "png"];
-                // const correspondingMime = ["image/jpeg", "image/jpeg", "image/png"];
+                const { uri } = response.assets[0];
+                const extensionIndex = uri.lastIndexOf(".");
+                const extension = uri.slice(extensionIndex + 1);
+                const allowedExtensions = ["jpg", "jpeg", "png"];
+                const correspondingMime = ["image/jpeg", "image/jpeg", "image/png"];
                 // const options = {
                 //     keyPrefix: AwsConfig.keyPrefix,
                 //     bucket: AwsConfig.bucket,
@@ -209,12 +231,18 @@ export default function Messages({ navigation, route }) {
                 //     accessKey: AwsConfig.accessKey,
                 //     secretKey: AwsConfig.secretKey,
                 // };
-                // const file = {
-                //     uri,
-                // name: `${this.messageIdGenerator()}.${extension}`,
-                //     type: correspondingMime[allowedExtensions.indexOf(extension)]
-                // };
-                console.log(uri);
+                const file = {
+                    uri,
+                    name: `${messageIdGenerator()}.${extension}`,
+                    type: correspondingMime[allowedExtensions.indexOf(extension)]
+                };
+
+                console.log(file);
+
+                console.log('uploading');
+
+                await postChatRes(file, progressCallback, userInfo.token);
+                console.log('uploaded success');
                 // RNS3.put(file, options)
                 //     .progress(event => {
                 //         console.log(`percent: ${event.percent}`);
