@@ -17,10 +17,11 @@ import { GiftedChat, Bubble } from 'react-native-gifted-chat'
 import firestore from '@react-native-firebase/firestore'
 import auth from '@react-native-firebase/auth'
 import { Icon } from 'native-base';
-import {Appbar} from 'react-native-paper';
+import { Appbar } from 'react-native-paper';
 import SafeAreaView from 'react-native-safe-area-view';
 import { useGlobals } from '../../contexts/Global';
 import { postChatRes } from '../../apis/chatres';
+import { baseUrl } from '../../Config/baseApi';
 
 const ImagePicker = require("react-native-image-picker");
 
@@ -43,7 +44,7 @@ export default function Messages({ navigation, route }) {
             text: 'hello!',
             createdAt: new Date().getTime(),
             image:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Paris_-_Eiffelturm_und_Marsfeld2.jpg/280px-Paris_-_Eiffelturm_und_Marsfeld2.jpg',
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Paris_-_Eiffelturm_und_Marsfeld2.jpg/280px-Paris_-_Eiffelturm_und_Marsfeld2.jpg',
             user: {
                 _id: 2,
                 name: 'Demo'
@@ -59,8 +60,7 @@ export default function Messages({ navigation, route }) {
         });
     }
     const [audioPath, setAudioPath] = useState(
-        `${
-        AudioUtils.DocumentDirectoryPath
+        `${AudioUtils.DocumentDirectoryPath
         }/${messageIdGenerator()}test.aac`
     );
     const [audioSettings, setAudioSettings] = useState({
@@ -74,9 +74,9 @@ export default function Messages({ navigation, route }) {
     });
     // const [currentFile, setCurrentFile] = useState(undefined);
     // const [progress, setProgress] = useState(0);
-    
+
     React.useLayoutEffect(() => {
-        navigation.setOptions({headerShown: false});
+        navigation.setOptions({ headerShown: false });
     }, [navigation]);
 
     const checkPermission = () => {
@@ -117,7 +117,9 @@ export default function Messages({ navigation, route }) {
     };
 
     async function handleSend(messages = []) {
-        const text = messages[0].text
+        const text = messages[0].text ?? '';
+        const image = messages[0].image ?? '';
+        const audio = messages[0].audio ?? '';
         console.log(userInfo.id);
         console.log(messages);
         console.log(thread._id);
@@ -127,6 +129,8 @@ export default function Messages({ navigation, route }) {
             .collection('MESSAGES')
             .add({
                 text,
+                image,
+                audio,
                 createdAt: new Date().getTime(),
                 user: {
                     _id: userInfo.id,
@@ -140,6 +144,8 @@ export default function Messages({ navigation, route }) {
                 {
                     latestMessage: {
                         text,
+                        image,
+                        audio,
                         createdAt: new Date().getTime()
                     }
                 },
@@ -157,10 +163,11 @@ export default function Messages({ navigation, route }) {
             .onSnapshot(querySnapshot => {
                 const messages = querySnapshot.docs.map(doc => {
                     const firebaseData = doc.data()
-
                     const data = {
                         _id: doc.id,
                         text: '',
+                        image: '',
+                        audio: '',
                         createdAt: new Date().getTime(),
                         ...firebaseData
                     }
@@ -184,22 +191,25 @@ export default function Messages({ navigation, route }) {
     useEffect(() => {
         if (checkedPermission) return;
 
-        checkPermission().then(async hasPermission => {
+        checkPermission().then(hasPermission => {
             setHasPermission(hasPermission);
             if (!hasPermission) return;
-            await AudioRecorder.prepareRecordingAtPath(
-                audioPath,
-                audioSettings
-            );
-            AudioRecorder.onProgress = data => {
-                console.log(data, "onProgress data");
-            };
-            AudioRecorder.onFinished = data => {
-                console.log(data, "on finish");
-            };
+            prepareRecord();
         });
     }, [checkedPermission])
 
+    const prepareRecord = async () => {
+        await AudioRecorder.prepareRecordingAtPath(
+            audioPath,
+            audioSettings
+        );
+        AudioRecorder.onProgress = data => {
+            console.log(data, "onProgress data");
+        };
+        AudioRecorder.onFinished = data => {
+            console.log(data, "on finish");
+        };
+    };
 
     const handleAddPicture = () => {
         // const { user } = this.props; // wherever you user data is stored;
@@ -224,13 +234,7 @@ export default function Messages({ navigation, route }) {
                 const extension = uri.slice(extensionIndex + 1);
                 const allowedExtensions = ["jpg", "jpeg", "png"];
                 const correspondingMime = ["image/jpeg", "image/jpeg", "image/png"];
-                // const options = {
-                //     keyPrefix: AwsConfig.keyPrefix,
-                //     bucket: AwsConfig.bucket,
-                //     region: AwsConfig.region,
-                //     accessKey: AwsConfig.accessKey,
-                //     secretKey: AwsConfig.secretKey,
-                // };
+
                 const file = {
                     uri,
                     name: `${messageIdGenerator()}.${extension}`,
@@ -241,36 +245,28 @@ export default function Messages({ navigation, route }) {
 
                 console.log('uploading');
 
-                await postChatRes(file, progressCallback, userInfo.token);
+                const { data, errors } = await postChatRes(file, progressCallback, userInfo.token);
+                if (errors) return;
                 console.log('uploaded success');
-                // RNS3.put(file, options)
-                //     .progress(event => {
-                //         console.log(`percent: ${event.percent}`);
-                //     })
-                //     .then(response => {
-                //         console.log(response, "response from rns3");
-                //         if (response.status !== 201) {
-                //             alert(
-                //                 "Something went wrong, and the profile pic was     not uploaded."
-                //             );
-                //             console.error(response.body);
-                //             return;
-                //         }
-                        // const message = {};
-                        // message._id = this.messageIdGenerator();
-                        // message.createdAt = Date.now();
-                        // message.user = {
-                        //     _id: user._id,
-                        //     name: `${user.firstName} ${user.lastName}`,
-                        //     avatar: user.avatar
-                        // };
-                        // message.image = response.headers.Location;
-                        // message.messageType = "image";
 
-                        // this.chatsFromFB.update({
-                        //     messages: [message, ...this.state.messages]
-                        // });
-                    // });
+                const message = {};
+                // message._id = this.messageIdGenerator();
+                // message.createdAt = Date.now();
+                // message.user = {
+                //     _id: user._id,
+                //     name: `${user.firstName} ${user.lastName}`,
+                //     avatar: user.avatar
+                // };
+                message.text = '';
+                message.image = baseUrl + data;
+                message.audio = '';
+                // message.messageType = "image";
+                handleSend([message]);
+
+                // this.chatsFromFB.update({
+                //     messages: [message, ...this.state.messages]
+                // });
+                // });
                 // if (!allowedExtensions.includes(extension)) {
                 //     return alert("That file type is not allowed.");
                 // }
@@ -296,49 +292,24 @@ export default function Messages({ navigation, route }) {
             setStartAudio(false);
             await AudioRecorder.stopRecording();
             console.log('record end');
-            // const fileName = `${messageIdGenerator()}.aac`;
-            // const file = {
-            //     uri: Platform.OS === "ios" ? audioPath : `file://${audioPath}`,
-            //     name: fileName,
-            //     type: `audio/aac`
-            // };
-            // const options = {
-            //     keyPrefix: AwsConfig.keyPrefix,
-            //     bucket: AwsConfig.bucket,
-            //     region: AwsConfig.region,
-            //     accessKey: AwsConfig.accessKey,
-            //     secretKey: AwsConfig.secretKey,
-            // };
-            // RNS3.put(file, options)
-                // .progress(event => {
-                //     console.log(`percent: ${event.percent}`);
-                // })
-                // .then(response => {
-                //     console.log(response, "response from rns3 audio");
-                //     if (response.status !== 201) {
-                //         alert("Something went wrong, and the audio was not uploaded.");
-                //         console.error(response.body);
-                //         return;
-                //     }
-                //     const message = {};
-                //     message._id = this.messageIdGenerator();
-                //     message.createdAt = Date.now();
-                //     message.user = {
-                //         _id: user._id,
-                //         name: `${user.firstName} ${user.lastName}`,
-                //         avatar: user.avatar
-                //     };
-                //     message.text = "";
-                //     message.audio = response.headers.Location;
-                //     message.messageType = "audio";
 
-                //     this.chatsFromFB.update({
-                //         messages: [message, ...this.state.messages]
-                //     });
-                // })
-                // .catch(err => {
-                //     console.log(err, "err from audio upload");
-                // });
+            const fileName = `${messageIdGenerator()}.aac`;
+            const file = {
+                uri: Platform.OS === "ios" ? audioPath : `file://${audioPath}`,
+                name: fileName,
+                type: `audio/aac`
+            };
+
+            console.log('uploading');
+
+            const { data, errors } = await postChatRes(file, progressCallback, userInfo.token);
+            if (errors) return;
+            console.log('uploaded success');
+            const message = {};
+            message.text = "";
+            message.image = "";
+            message.audio = baseUrl + data;
+            handleSend([message]);
         }
     };
 
@@ -372,51 +343,53 @@ export default function Messages({ navigation, route }) {
         const isSameUser = pUser._id === user._id;
         const shouldNotRenderName = isSameUser;
         let firstName = user.name.split(" ")[0];
-        let lastName = user.name.split(" ")[1][0];
+        let lastName = "";
+        if (user.name.split(" ")[1])
+            lastName = user.name.split(" ")[1][0];
         return shouldNotRenderName ? (
             <View />
         ) : (
-                <View>
-                    <Text style={{ color: "grey", padding: 2, alignSelf: "center" }}>
-                        {`${firstName} ${lastName}.`}
-                    </Text>
-                </View>
-            );
+            <View>
+                <Text style={{ color: "grey", padding: 2, alignSelf: "center" }}>
+                    {`${firstName} ${lastName}.`}
+                </Text>
+            </View>
+        );
     };
-    
+
     const renderAudio = props => {
         return !props.currentMessage.audio ? (
             <View />
         ) : (
-                <Ionicons
-                    name="ios-play"
-                    size={35}
-                    color={playAudio ? "red" : "blue"}
-                    style={{
-                        left: 90,
-                        position: "relative",
-                        shadowColor: "#000",
-                        shadowOffset: { width: 0, height: 0 },
-                        shadowOpacity: 0.5,
-                        backgroundColor: "transparent"
-                    }}
-                    onPress={() => {
-                        setPlayAudio(true);
-                        const sound = new Sound(props.currentMessage.audio, "", error => {
-                            if (error) {
-                                console.log("failed to load the sound", error);
+            <Ionicons
+                name="ios-play"
+                size={35}
+                color={playAudio ? "red" : "blue"}
+                style={{
+                    left: 90,
+                    position: "relative",
+                    shadowColor: "#000",
+                    shadowOffset: { width: 0, height: 0 },
+                    shadowOpacity: 0.5,
+                    backgroundColor: "transparent"
+                }}
+                onPress={() => {
+                    setPlayAudio(true);
+                    const sound = new Sound(props.currentMessage.audio, "", error => {
+                        if (error) {
+                            console.log("failed to load the sound", error);
+                        }
+                        sound.play(success => {
+                            console.log(success, "success play");
+                            if (!success) {
+                                Alert.alert("There was an error playing this audio");
                             }
-                            setPlayAudio(false);
-                            sound.play(success => {
-                                console.log(success, "success play");
-                                if (!success) {
-                                    Alert.alert("There was an error playing this audio");
-                                }
-                            });
                         });
-                    }}
-                />
-            );
+                        setPlayAudio(false);
+                    });
+                }}
+            />
+        );
     };
 
     const renderBubble = props => {
@@ -432,10 +405,10 @@ export default function Messages({ navigation, route }) {
     return (
         <SafeAreaView style={[styles.container]}>
             <Appbar.Header
-            style={{
-                marginTop: 30,
-                backgroundColor: 'rgb(234, 164, 67)',
-                width: '100%'
+                style={{
+                    marginTop: 30,
+                    backgroundColor: 'rgb(234, 164, 67)',
+                    width: '100%'
                 }}
             >
                 <Appbar.BackAction
@@ -443,40 +416,40 @@ export default function Messages({ navigation, route }) {
                     color={'#4F0F0F'}
                 />
                 <Appbar.Content
-                title={ "Message" }
-                titleStyle={{
-                    fontSize: 26,
-                    fontFamily: 'Bradleys Pen',
-                    // color: theme.colors.primary,
-                    color: '#4F0F0F',
-                    alignSelf: 'center',
-                }}
+                    title={"Message"}
+                    titleStyle={{
+                        fontSize: 26,
+                        fontFamily: 'Bradleys Pen',
+                        // color: theme.colors.primary,
+                        color: '#4F0F0F',
+                        alignSelf: 'center',
+                    }}
                 />
                 <TouchableOpacity
                     style={{ marginLeft: 10 }}
                     onPress={() => {
-                    // superNavigation.openDrawer();
+                        // superNavigation.openDrawer();
                     }}
                 >
                     <Icon
-                    name='add-a-photo'
-                    type='MaterialIcons'
-                    style={{
-                        fontSize: 20,
-                        marginRight: 10,
-                        // color: theme.colors.primary
-                        color: '#4F0F0F',
+                        name='add-a-photo'
+                        type='MaterialIcons'
+                        style={{
+                            fontSize: 20,
+                            marginRight: 10,
+                            // color: theme.colors.primary
+                            color: '#4F0F0F',
                         }}
-                    onPress={
-                        () => {
-                        // console.log('CreateChatRoom');
-                        handleAddPicture();
+                        onPress={
+                            () => {
+                                // console.log('CreateChatRoom');
+                                handleAddPicture();
+                            }
                         }
-                    }
                     />
                 </TouchableOpacity>
             </Appbar.Header>
-            <View style={{width: '100%', flex: 1}}>
+            <View style={{ width: '100%', flex: 1 }}>
                 {renderAndroidMicrophone()}
                 <GiftedChat
                     messages={messages}
@@ -508,7 +481,7 @@ export default function Messages({ navigation, route }) {
                     user={{
                         _id: userInfo.id,
                         name: `${userInfo.firstName} ${userInfo.lastName}`,
-                }}
+                    }}
                 />
             </View>
         </SafeAreaView>
@@ -516,10 +489,9 @@ export default function Messages({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    flex: 1,
-    alignItems: 'center',
-  },
+    container: {
+        width: '100%',
+        flex: 1,
+        alignItems: 'center',
+    },
 })
- 

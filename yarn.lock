@@ -6253,6 +6253,13 @@ react-native-iphone-x-helper@^1.0.3, react-native-iphone-x-helper@^1.2.1, react-
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz#20c603e9a0e765fd6f97396638bdeb0e5a60b010"
   integrity sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg==
 
+react-native-lightbox-v2@^0.8.7:
+  version "0.8.7"
+  resolved "https://registry.yarnpkg.com/react-native-lightbox-v2/-/react-native-lightbox-v2-0.8.7.tgz#7398cf5a7af948e3782a98e54c1cb2e64e58024e"
+  integrity sha512-rw97PJL8kKyNgvN1CrMj+amQz3A+ClKFkSNi9zOKq2+GgqttOdZ4sZ4piQTwfdE+fAEzCazLGhaKtWhHsBBYxQ==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-lightbox@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/react-native-lightbox/-/react-native-lightbox-0.8.1.tgz#4e561ec46e61617a0f3f12c88ec2695360998878"

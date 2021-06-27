@@ -3,19 +3,19 @@ import FormData from 'form-data';
 import { Platform } from 'react-native';
 
 const createFormData = (file, body = undefined) => {
-    const data = new FormData();
-    data.append('chatres', {
-        name: file.name,
-        uri: Platform.OS === 'android' ? file.uri : file.uri.replace('file://', ''),
-        type: 'image/*'
+  const data = new FormData();
+  data.append('chatres', {
+    name: file.name,
+    uri: Platform.OS === 'android' ? file.uri : file.uri.replace('file://', ''),
+    type: 'image/*'
+  });
+
+  if (body)
+    Object.keys(body).forEach(key => {
+      data.append(key, body[key]);
     });
 
-    if(body)
-      Object.keys(body).forEach(key => {
-          data.append(key, body[key]);
-      });
-
-    return data;
+  return data;
 };
 
 export const postChatRes = (file, onUploadProgress, token = '') => {
@@ -28,16 +28,17 @@ export const postChatRes = (file, onUploadProgress, token = '') => {
       Authorization: `Bearer ${token}`,
       'Accept': 'application/json',
       'Content-Type': 'multipart/form-data',
-      },
+    },
   };
 
   return api
-    .post('api/fileUpload', formData, config, 
-    )
+    .post('api/fileupload', formData, config,
+  )
     .then((resp) => {
       console.log('Post Shill success :')
-      console.log(resp);
+      console.log(resp.data);
       return {
+        data: resp.data
       };
     })
     .catch((error) => {

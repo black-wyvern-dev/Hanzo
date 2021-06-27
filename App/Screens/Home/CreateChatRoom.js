@@ -14,11 +14,13 @@ import firestore from '@react-native-firebase/firestore';
 
 // import { useGlobals } from '../../contexts/Global';
 
-const CreateChatRoom = ({navigation}) => {
+const CreateChatRoom = ({ navigation }) => {
   const theme = useTheme();
   const [roomName, setRoomName] = React.useState('');
 
   const handleButtonPress = () => {
+    console.log('okokokokokook');
+
     if (roomName.length > 0) {
       // create new thread using firebase & firestore
       firestore()
@@ -50,15 +52,15 @@ const CreateChatRoom = ({navigation}) => {
         backgroundColor="rgb(234, 164, 67)"
         translucent={true}
       />
-      <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>
+      <View style={[styles.inputContainer, { flex: 1, width: '100%' }]}>
         <TextInput
           style={[styles.input]}
           onChangeText={setRoomName}
           placeholder="New room id"
           value={roomName}
         />
-        <TouchableOpacity onPress={()=>handleButtonPress()}>
-          <Button style={[{textAlign: 'center'}]} title={'Create Chatroom'} />
+        <TouchableOpacity >
+          <Button style={[{ textAlign: 'center' }]} onPress={handleButtonPress} title={'Create Chatroom'} />
         </TouchableOpacity>
       </View>
     </SafeAreaView>

@@ -36,6 +36,7 @@ import CustomerPage from './Customers';
 import GamePage from './Game';
 import RankingPage from './Ranking';
 import WalletPage from './Wallet';
+import SettingsPage from './Settings';
 
 const Drawer = createDrawerNavigator();
 
@@ -82,7 +83,7 @@ function CustomDrawerContent(props) {
     {
       drawerLabel: 'Settings',
       drawerIcon: 'settings',
-      routeName: 'Main',
+      routeName: 'SettingsPage',
       group: '1',
     },
     {
@@ -183,6 +184,7 @@ const Main = ({ navigation }) => {
         <Drawer.Screen name="GamePage" component={GamePage} />
         <Drawer.Screen name="RankingPage" component={RankingPage} />
         <Drawer.Screen name="WalletPage" component={WalletPage} />
+        <Drawer.Screen name="SettingsPage" component={SettingsPage} />
       </Drawer.Navigator>
     </SafeAreaProvider >
   );
