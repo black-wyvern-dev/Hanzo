@@ -77,3 +77,83 @@ export const postShill = (data, token = '') => {
       return { errors: 'Post Shill failure: ' + error.message };
     });
 };
+
+export const changeProfile = (data, token = '') => {
+
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  return api
+    .post('api/changeprofile', data, config)
+    .then((resp) => {
+      data = resp.data;
+      return {
+        data
+      };
+    })
+    .catch((error) => {
+      console.log('Post Shill Axios Error :' + error.message);
+      return { errors: 'Post Shill failure: ' + error.message };
+    });
+}
+const createFormData = (file, body = undefined) => {
+  const data = new FormData();
+  data.append('avatar', {
+    name: file.name,
+    uri: Platform.OS === 'android' ? file.uri : file.uri.replace('file://', ''),
+    type: 'image/*'
+  });
+
+  if (body)
+    Object.keys(body).forEach(key => {
+      data.append(key, body[key]);
+    });
+
+  return data;
+};
+
+export const avatarUpload = (file, onUploadProgress, token = '') => {
+
+  const formData = createFormData(file);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Accept': 'application/json',
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+
+  return api
+    .post('api/avatarupload', formData, config,
+  )
+    .then((resp) => {
+      return {
+        avatarUrl: resp.data
+      };
+    })
+    .catch((error) => {
+      console.log('Update Avatar Axios Error :' + error.message);
+      return { errorAvatar: 'Update Avatar failure: ' + error.message };
+    });
+}
+
+export const changePassword = (data, token = '') => {
+
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  return api
+    .post('api/changepassword', data, config)
+    .then((resp) => {
+      data = resp.data;
+      return {
+        data
+      };
+    })
+    .catch((error) => {
+      console.log('Update Avatar Axios Error :' + error.message);
+      return { errors: 'Update Avatar failure: ' + error.message };
+    });
+}

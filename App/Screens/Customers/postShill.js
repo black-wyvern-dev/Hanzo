@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, TextInput, Image, StyleSheet} from 'react-native';
+import { Text, View, TextInput, Image, StyleSheet } from 'react-native';
 import {
   Avatar,
   useTheme,
@@ -22,74 +22,74 @@ export const ShillPostForm = () => {
   const [showProgress, setShowProgress] = React.useState(false);
   const [showAlert, setShowAlert] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState('Unkown Error');
-  
+
   const closeAlert = () => {
     setShowAlert(false);
   }
 
-  const postBtnHandle = async() => {
-    try{
-        if(name=='' || id == '' || content == '') {
-            console.log('Shill Info is invalid. Try again.');
-            setErrorMsg('Shill Info is invalid. Try again.');
-            setShowAlert(true);
-            return;
-        }
-        setShowProgress(true);
-        const {
-            errors,
-        } = await postShill({
-            name,
-            id,
-            content,
-            avatar,
-            image
-        }, userInfo.token ?? '');
-        setShowProgress(false);
-        if (!errors) {
-            console.log('Post succeed');
-        } else {
-            setErrorMsg(errors);
-            setShowAlert(true);
-        }
-    } catch(err){
-        
-    } finally {}
+  const postBtnHandle = async () => {
+    try {
+      if (name == '' || id == '' || content == '') {
+        console.log('Shill Info is invalid. Try again.');
+        setErrorMsg('Shill Info is invalid. Try again.');
+        setShowAlert(true);
+        return;
+      }
+      setShowProgress(true);
+      const {
+        errors,
+      } = await postShill({
+        name,
+        id,
+        content,
+        avatar,
+        image
+      }, userInfo.token ?? '');
+      setShowProgress(false);
+      if (!errors) {
+        console.log('Post succeed');
+      } else {
+        setErrorMsg(errors);
+        setShowAlert(true);
+      }
+    } catch (err) {
+
+    } finally { }
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.rowContainer}>
-        <View style={[styles.inputContainer, {flex: 0.5}]}>
-            <Text style={[styles.label, {color: theme.colors.primary}]}> Name </Text>
-            <TextInput
+        <View style={[styles.inputContainer, { flex: 0.5 }]}>
+          <Text style={[styles.label, { color: theme.colors.primary }]}> Name </Text>
+          <TextInput
             style={[styles.input]}
             onChangeText={setName}
             placeholder=""
             value={name}
-            />
-            <Text style={[styles.label, {color: theme.colors.primary}]}> Id </Text>
-            <TextInput
+          />
+          <Text style={[styles.label, { color: theme.colors.primary }]}> Id </Text>
+          <TextInput
             style={[styles.input]}
             onChangeText={setId}
             placeholder=""
             value={id}
-            />
+          />
         </View>
         <View style={[styles.inputContainer, styles.avatarContainer]}>
-            <Avatar.Image source={{ uri: avatar }} size={85} />
-            <Icon
-              name='edit'
-              type='MaterialIcons'
-              style={[styles.avatarIcon, {}]}
-              onPress={() => {
-                // superNavigation.openDrawer();
-              }}
-            />
+          <Avatar.Image source={{ uri: avatar }} size={85} />
+          <Icon
+            name='edit'
+            type='MaterialIcons'
+            style={[styles.avatarIcon, {}]}
+            onPress={() => {
+              // superNavigation.openDrawer();
+            }}
+          />
         </View>
       </View>
       <View style={[styles.inputContainer, {}]}>
-        <Text style={[styles.label, {color: theme.colors.primary}]}> Content </Text>
+        <Text style={[styles.label, { color: theme.colors.primary }]}> Content </Text>
         <TextInput
           style={[styles.input]}
           onChangeText={setContent}
@@ -98,7 +98,7 @@ export const ShillPostForm = () => {
         />
       </View>
       <View style={[styles.inputContainer, {}]}>
-        <Text style={[styles.label, {color: theme.colors.primary}]}> Image(optional) </Text>
+        <Text style={[styles.label, { color: theme.colors.primary }]}> Image(optional) </Text>
         <TextInput
           style={[styles.input]}
           onChangeText={setImage}
@@ -106,13 +106,13 @@ export const ShillPostForm = () => {
           value={image}
         />
         {
-            image != '' ?
-                <Image
-                source={{ uri: image }}
-                style={[
-                    styles.image,
-                ]}
-                />
+          image != '' ?
+            <Image
+              source={{ uri: image }}
+              style={[
+                styles.image,
+              ]}
+            />
             : <></>
         }
       </View>
@@ -125,17 +125,17 @@ export const ShillPostForm = () => {
         Post a message
       </Button>
       <Overlay isVisible={showAlert} onBackdropPress={() => closeAlert()}>
-        <Text style={{margin: 15}}>{errorMsg}</Text>
+        <Text style={{ margin: 15 }}>{errorMsg}</Text>
         <Button
-            style={[styles.button, {backgroundColor: theme.colors.primary}]}
-            onPress={() => closeAlert()}
-            labelStyle={{ color: 'white' }}
+          style={[styles.button, { backgroundColor: theme.colors.primary }]}
+          onPress={() => closeAlert()}
+          labelStyle={{ color: 'white' }}
         >
-            Close
+          Close
         </Button>
       </Overlay>
       <Overlay isVisible={showProgress} onBackdropPress={() => setShowProgress(false)}>
-        <Spinner style={{margin: 15}}/>
+        <Spinner style={{ margin: 15 }} />
       </Overlay>
     </View>
   );
