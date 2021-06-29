@@ -3,11 +3,13 @@ import api from '../Config/baseApi';
 export const getMusicList = (token = '') => {
   console.log('request for music list: ');
   // console.log(token);
+
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
+
   return api
-    .post('api/getmusiclist', config)
+    .post('api/getmusiclist', {}, config)
     .then((resp) => {
       console.log('GetMusicList success :');
       let rspData = resp.data;
@@ -18,7 +20,7 @@ export const getMusicList = (token = '') => {
         // return {};
       }
       // console.log('responsed data OK: ', rspData.success.data);
-      const data = rspData.success.data;
+      const data = rspData.success;
       return {
         data,
       };

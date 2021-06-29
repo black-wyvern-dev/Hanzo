@@ -38,16 +38,17 @@ import styles from './MusicListStyle';
 // }
 // ]);
 
-const MusicList = ({navigation}) => {
+const MusicList = ({ navigation }) => {
   const theme = useTheme();
   const [{ musicList }, dispatch] = useGlobals();
   const [loading, setLoading] = React.useState(false);
-//  console.log(musicList);
+  console.log(musicList);
+  //  console.log(musicList);
   React.useEffect(() => {
   }, []);
 
   if (loading) {
-    return <Spinner style={{margin: 15}}/>;
+    return <Spinner style={{ margin: 15 }} />;
   }
 
   return (
@@ -58,7 +59,7 @@ const MusicList = ({navigation}) => {
         backgroundColor="rgb(234, 164, 67)"
         translucent={true}
       />
-      <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>
+      <View style={[styles.inputContainer, { flex: 1, width: '100%' }]}>
         <View style={styles.listContainer}>
           <FlatList
             data={musicList}
@@ -71,7 +72,7 @@ const MusicList = ({navigation}) => {
                       <Text style={styles.nameText}>{item.title}</Text>
                     </View>
                     <Text style={styles.contentText}>
-                      {item.album+'     '+item.artist}
+                      {item.album + '     ' + item.artist}
                     </Text>
                   </View>
                 </View>
