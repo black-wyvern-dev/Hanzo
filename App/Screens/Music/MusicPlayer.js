@@ -10,11 +10,11 @@ import {
 import SafeAreaView from 'react-native-safe-area-view';
 
 import TrackPlayer from 'react-native-track-player';
-import {useTrackPlayerProgress} from 'react-native-track-player/lib/hooks';
+import { useTrackPlayerProgress } from 'react-native-track-player/lib/hooks';
 import Slider from '@react-native-community/slider';
 import { useTheme } from 'react-native-paper';
-import {useTrackPlayerEvents} from 'react-native-track-player/lib/hooks';
-import {TrackPlayerEvents,STATE_PLAYING} from 'react-native-track-player';
+import { useTrackPlayerEvents } from 'react-native-track-player/lib/hooks';
+import { TrackPlayerEvents, STATE_PLAYING } from 'react-native-track-player';
 
 import styles from './MusicPlayerStyle';
 
@@ -56,13 +56,13 @@ const MusicPlayer = ({ navigation, route }) => {
   const [sliderValue, setSliderValue] = React.useState(0);
   const [isSeeking, setIsSeeking] = React.useState(false);
   //These values will update every 250ms 
-  const {position, duration} = useTrackPlayerProgress(250);
+  const { position, duration } = useTrackPlayerProgress(250);
 
   //initialize the TrackPlayer when the App component is mounted
   React.useEffect(() => {
     const startPlayer = async () => {
-       let isInit =  await trackPlayerInit(music);
-       setIsTrackPlayerInit(isInit);
+      let isInit = await trackPlayerInit(music);
+      setIsTrackPlayerInit(isInit);
     }
     startPlayer();
   }, []);
@@ -74,7 +74,7 @@ const MusicPlayer = ({ navigation, route }) => {
       setIsPlaying(false);
     }
   });
-  
+
   //this hook updates the value of the slider whenever the current position of the song changes
   React.useEffect(() => {
     if (!isSeeking && position && duration) {
@@ -112,7 +112,7 @@ const MusicPlayer = ({ navigation, route }) => {
         backgroundColor="rgb(234, 164, 67)"
         translucent={true}
       />
-      <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>     
+      <View style={[styles.inputContainer, { flex: 1, width: '100%' }]}>
         <View style={styles.mainContainer}>
           <View style={styles.imageContainer}>
             <Image
