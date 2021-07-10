@@ -21,7 +21,7 @@ const CustomersLayer = ({ navigation, route }) => {
         backgroundColor={theme.colors.text}
         translucent={true}
       />
-      <View style={[styles.inputContainer, {flex: 1, width: '100%'}]}>  
+      <View style={[styles.inputContainer, { flex: 1, width: '100%' }]}>
         <Text>CustomerLayer</Text>
       </View>
     </SafeAreaView>

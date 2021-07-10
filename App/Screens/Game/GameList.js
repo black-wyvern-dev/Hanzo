@@ -58,7 +58,7 @@ const GameList = ({ navigation }) => {
       <View>
         <ImageBackground
           source=
-          {{ uri: 'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/115934590/original/88c6a12c94e284fd03a83c18becd9bee14de43ea/design-main-icon-for-your-app-or-game.png' }}
+          {{ uri: 'https://www.gameogre.com/wp-content/uploads/2017/06/mobilegamecategories-696x348.png' }}
           style={styles.imageBackgroundStyle}
         >
           <View style={styles.imageBackgroundOverlay}>

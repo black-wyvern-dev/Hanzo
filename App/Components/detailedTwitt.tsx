@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, ImageBackground } from 'react-native';
 import {
   Surface,
   Title,
@@ -37,37 +37,40 @@ export const DetailedTwitt = (props: Props) => {
     .string();
 
   return (
-    <Surface style={styles.container}>
-      <View style={styles.topRow}>
-        <Avatar.Image
-          style={styles.avatar}
-          source={{ uri: props.avatar }}
-          size={60}
-        />
-        <View>
-          <Title>{props.name}</Title>
-          <Caption style={styles.handle}>{props.handle}</Caption>
+    <ImageBackground source={{ uri: 'https://static.wixstatic.com/media/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.jpg/v1/fill/w_1370,h_3000,al_c,q_90/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.webp' }} style={{ width: "100%", height: "100%" }}>
+      <Surface style={styles.container}>
+        <View style={styles.topRow}>
+          <Avatar.Image
+            style={styles.avatar}
+            source={{ uri: props.avatar }}
+            size={60}
+          />
+          <View>
+            <Title>{props.name}</Title>
+            <Caption style={styles.handle}>{props.handle}</Caption>
+          </View>
         </View>
-      </View>
-      <Subheading style={[styles.content, { color: contentColor }]}>
-        {props.content}
-      </Subheading>
-      <Image
-        source={{ uri: props.image }}
-        style={[
-          styles.image,
-          {
-            borderColor: imageBorderColor,
-          },
-        ]}
-      />
-    </Surface>
+        <Subheading style={[styles.content, { color: contentColor }]}>
+          {props.content}
+        </Subheading>
+        <Image
+          source={{ uri: props.image }}
+          style={[
+            styles.image,
+            {
+              borderColor: imageBorderColor,
+            },
+          ]}
+        />
+      </Surface>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'transparent',
     padding: 20,
   },
   avatar: {

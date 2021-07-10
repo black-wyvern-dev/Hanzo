@@ -4,7 +4,8 @@ import {
     View,
     Text,
     TextInput,
-    ScrollView
+    ScrollView,
+    ImageBackground
 } from 'react-native';
 import {
     Avatar,
@@ -175,103 +176,149 @@ const ProfileSettings = ({ navigation }) => {
         } finally { }
     }
     return (
-        <ScrollView>
-            <View style={styles.container}>
-                <Text style={{ alignSelf: 'center', fontSize: 20 }}>
-                    Primary Information
-                </Text>
-                <View style={styles.rowContainer}>
-                    <View style={[styles.inputContainer, { flex: 0.5 }]}>
-                        <Text style={[styles.label, { color: theme.colors.primary }]}> First Name </Text>
+        <ImageBackground source={{ uri: 'https://static.wixstatic.com/media/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.jpg/v1/fill/w_1370,h_3000,al_c,q_90/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.webp' }} style={{ width: "100%", height: "100%" }}>
+            <ScrollView>
+                <View style={styles.container}>
+                    <Text style={{
+                        fontSize: 20,
+                        marginBottom: 10,
+                        color: 'rgb(74, 15, 15)',
+                        textShadowOffset: { width: 1.5, height: 1.5 },
+                        textShadowRadius: 4,
+                        textShadowColor: 'rgba(0,0,0,0.75)',
+                        alignSelf: 'center'
+                    }}>
+                        Primary Information
+                    </Text>
+                    <View style={styles.rowContainer}>
+                        <View style={[styles.inputContainer, { flex: 0.5 }]}>
+                            <Text style={[styles.label, {
+                                color: 'rgb(74, 15, 15)',
+                                textShadowOffset: { width: 1, height: 1 },
+                                textShadowRadius: 3,
+                                textShadowColor: 'rgba(0,0,0,0.75)',
+                            }]}> First Name </Text>
+                            <TextInput
+                                style={[styles.input]}
+                                onChangeText={setFirstName}
+                                placeholder=""
+                                value={firstName}
+                            />
+                            <Text style={[styles.label, {
+                                color: 'rgb(74, 15, 15)',
+                                textShadowOffset: { width: 1, height: 1 },
+                                textShadowRadius: 3,
+                                textShadowColor: 'rgba(0,0,0,0.75)',
+                            }]}> Last Name </Text>
+                            <TextInput
+                                style={[styles.input]}
+                                onChangeText={setLastName}
+                                placeholder=""
+                                value={lastName}
+                            />
+                        </View>
+                        <View style={[styles.inputContainer, styles.avatarContainer]}>
+                            <Avatar.Image source={{ uri: avatar }} size={85} />
+                            <Icon
+                                name='edit'
+                                type='MaterialIcons'
+                                style={[styles.avatarIcon, {}]}
+                                onPress={handleAddAvatar}
+                            />
+                        </View>
+                    </View>
+                    <View style={[styles.inputContainer, {}]}>
+                        <Text style={[styles.label, {
+                            color: 'rgb(74, 15, 15)',
+                            textShadowOffset: { width: 1, height: 1 },
+                            textShadowRadius: 3,
+                            textShadowColor: 'rgba(0,0,0,0.75)',
+                        }]}> Email Address </Text>
                         <TextInput
                             style={[styles.input]}
-                            onChangeText={setFirstName}
+                            onChangeText={setEmail}
                             placeholder=""
-                            value={firstName}
-                        />
-                        <Text style={[styles.label, { color: theme.colors.primary }]}> Last Name </Text>
-                        <TextInput
-                            style={[styles.input]}
-                            onChangeText={setLastName}
-                            placeholder=""
-                            value={lastName}
+                            value={email}
                         />
                     </View>
-                    <View style={[styles.inputContainer, styles.avatarContainer]}>
-                        <Avatar.Image source={{ uri: avatar }} size={85} />
-                        <Icon
-                            name='edit'
-                            type='MaterialIcons'
-                            style={[styles.avatarIcon, {}]}
-                            onPress={handleAddAvatar}
-                        />
-                    </View>
-                </View>
-                <View style={[styles.inputContainer, {}]}>
-                    <Text style={[styles.label, { color: theme.colors.primary }]}> Email Address </Text>
-                    <TextInput
-                        style={[styles.input]}
-                        onChangeText={setEmail}
-                        placeholder=""
-                        value={email}
-                    />
-                </View>
-                <Button
-                    onPress={postBtnHandle}
-                    style={styles.button}
-                    mode="contained"
-                    labelStyle={{ color: 'white' }}
-                >
-                    Set Information
-                </Button>
-                <Text style={{ alignSelf: 'center', fontSize: 20, marginTop: 10 }}>
-                    Password Settings
-                </Text>
-                <View style={[styles.inputContainer, {}]}>
-                    <Text style={[styles.label, { color: theme.colors.primary }]}> New Password </Text>
-                    <TextInput
-                        style={[styles.input]}
-                        placeholder="Please Enter New Password"
-                        secureTextEntry={true}
-                        autoCompleteType="password"
-                        value={newPassword}
-                        onChangeText={setNewPassword}
-                    />
-                </View>
-                <View style={[styles.inputContainer, {}]}>
-                    <Text style={[styles.label, { color: theme.colors.primary }]}> New Password Confirmation</Text>
-                    <TextInput
-                        style={[styles.input]}
-                        placeholder="Please Check New Password"
-                        secureTextEntry={true}
-                        autoCompleteType="password"
-                        value={newPasswordConfirm}
-                        onChangeText={setNewPasswordConfirm}
-                    />
-                </View>
-                <Button
-                    onPress={handleChangePassword}
-                    style={styles.button}
-                    mode="contained"
-                    labelStyle={{ color: 'white' }}
-                >
-                    Change Password
-                </Button>
-                <Overlay isVisible={showAlert} onBackdropPress={() => closeAlert()}>
-                    <Text style={{ margin: 15 }}>{errorMsg}</Text>
                     <Button
-                        style={[styles.button, { backgroundColor: theme.colors.primary }]}
-                        onPress={() => closeAlert()}
-                        labelStyle={{ color: 'white' }}
+                        onPress={postBtnHandle}
+                        style={styles.button}
+                        mode="contained"
+                        labelStyle={{ color: 'rgb(74, 15, 15)' }}
+                        color="#EAA443"
                     >
-                        Close
+                        Set Information
                     </Button>
-                </Overlay>
-                <Overlay isVisible={showProgress} onBackdropPress={() => setShowProgress(false)}>
-                    <Spinner style={{ margin: 15 }} />
-                </Overlay>
-            </View>
-        </ScrollView>
+                    <Text style={{
+                        fontSize: 20,
+                        marginBottom: 10,
+                        marginTop: 20,
+                        color: 'rgb(74, 15, 15)',
+                        textShadowOffset: { width: 1.5, height: 1.5 },
+                        textShadowRadius: 4,
+                        textShadowColor: 'rgba(0,0,0,0.75)',
+                        alignSelf: 'center'
+                    }}>
+                        Password Settings
+                    </Text>
+                    <View style={[styles.inputContainer, {}]}>
+                        <Text style={[styles.label, {
+                            color: 'rgb(74, 15, 15)',
+                            textShadowOffset: { width: 1, height: 1 },
+                            textShadowRadius: 3,
+                            textShadowColor: 'rgba(0,0,0,0.75)',
+                        }]}> New Password </Text>
+                        <TextInput
+                            style={[styles.input]}
+                            placeholder="Please Enter New Password"
+                            secureTextEntry={true}
+                            autoCompleteType="password"
+                            value={newPassword}
+                            onChangeText={setNewPassword}
+                        />
+                    </View>
+                    <View style={[styles.inputContainer, {}]}>
+                        <Text style={[styles.label, {
+                            color: 'rgb(74, 15, 15)',
+                            textShadowOffset: { width: 1, height: 1 },
+                            textShadowRadius: 3,
+                            textShadowColor: 'rgba(0,0,0,0.75)',
+                        }]}> New Password Confirmation</Text>
+                        <TextInput
+                            style={[styles.input]}
+                            placeholder="Please Check New Password"
+                            secureTextEntry={true}
+                            autoCompleteType="password"
+                            value={newPasswordConfirm}
+                            onChangeText={setNewPasswordConfirm}
+                        />
+                    </View>
+                    <Button
+                        onPress={handleChangePassword}
+                        style={styles.button}
+                        mode="contained"
+                        labelStyle={{ color: 'rgb(74, 15, 15)' }}
+                        color="#EAA443"
+                    >
+                        Change Password
+                    </Button>
+                    <Overlay isVisible={showAlert} onBackdropPress={() => closeAlert()}>
+                        <Text style={{ margin: 15 }}>{errorMsg}</Text>
+                        <Button
+                            style={[styles.button, { backgroundColor: theme.colors.primary }]}
+                            onPress={() => closeAlert()}
+                            labelStyle={{ color: 'white' }}
+                        >
+                            Close
+                        </Button>
+                    </Overlay>
+                    <Overlay isVisible={showProgress} onBackdropPress={() => setShowProgress(false)}>
+                        <Spinner style={{ margin: 15 }} />
+                    </Overlay>
+                </View>
+            </ScrollView>
+        </ImageBackground>
     );
 };
 

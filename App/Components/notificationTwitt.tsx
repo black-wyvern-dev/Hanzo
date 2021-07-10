@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 15,
     paddingRight: 15,
+    backgroundColor: 'transparent',
     paddingBottom: 15,
   },
   leftColumn: {

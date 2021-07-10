@@ -61,14 +61,24 @@ export const ShillPostForm = () => {
     <View style={styles.container}>
       <View style={styles.rowContainer}>
         <View style={[styles.inputContainer, { flex: 0.5 }]}>
-          <Text style={[styles.label, { color: theme.colors.primary }]}> Name </Text>
+          <Text style={[styles.label, {
+            color: 'rgb(74, 15, 15)',
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 3,
+            textShadowColor: 'rgba(0,0,0,0.75)',
+          }]}> Name </Text>
           <TextInput
             style={[styles.input]}
             onChangeText={setName}
             placeholder=""
             value={name}
           />
-          <Text style={[styles.label, { color: theme.colors.primary }]}> Id </Text>
+          <Text style={[styles.label, {
+            color: 'rgb(74, 15, 15)',
+            textShadowOffset: { width: 1, height: 1 },
+            textShadowRadius: 3,
+            textShadowColor: 'rgba(0,0,0,0.75)',
+          }]}> Id </Text>
           <TextInput
             style={[styles.input]}
             onChangeText={setId}
@@ -89,7 +99,12 @@ export const ShillPostForm = () => {
         </View>
       </View>
       <View style={[styles.inputContainer, {}]}>
-        <Text style={[styles.label, { color: theme.colors.primary }]}> Content </Text>
+        <Text style={[styles.label, {
+          color: 'rgb(74, 15, 15)',
+          textShadowOffset: { width: 1, height: 1 },
+          textShadowRadius: 3,
+          textShadowColor: 'rgba(0,0,0,0.75)',
+        }]}> Content </Text>
         <TextInput
           style={[styles.input]}
           onChangeText={setContent}
@@ -98,7 +113,12 @@ export const ShillPostForm = () => {
         />
       </View>
       <View style={[styles.inputContainer, {}]}>
-        <Text style={[styles.label, { color: theme.colors.primary }]}> Image(optional) </Text>
+        <Text style={[styles.label, {
+          color: 'rgb(74, 15, 15)',
+          textShadowOffset: { width: 1, height: 1 },
+          textShadowRadius: 3,
+          textShadowColor: 'rgba(0,0,0,0.75)',
+        }]}> Image(optional) </Text>
         <TextInput
           style={[styles.input]}
           onChangeText={setImage}
@@ -120,7 +140,8 @@ export const ShillPostForm = () => {
         onPress={postBtnHandle}
         style={styles.button}
         mode="contained"
-        labelStyle={{ color: 'white' }}
+        labelStyle={{ color: 'rgb(74, 15, 15)' }}
+        color="#EAA443"
       >
         Post a message
       </Button>
@@ -171,9 +192,10 @@ const styles = StyleSheet.create({
   },
   input: {
     borderBottomWidth: 2,
-    borderBottomColor: '#DDD',
+    borderBottomColor: '#EAA443',
     paddingBottom: 1,
     marginBottom: 10,
+    color: 'rgb(74, 15, 15)',
   },
   label: {
     color: 'red',

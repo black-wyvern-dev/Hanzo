@@ -20,9 +20,10 @@ const styles = StyleSheet.create({
   },
   input: {
     borderBottomWidth: 2,
-    borderBottomColor: '#DDD',
+    borderBottomColor: '#EAA443',
     paddingBottom: 1,
     marginBottom: 10,
+    color: 'rgb(74, 15, 15)',
   },
   listContainer: {
     flex: 1,

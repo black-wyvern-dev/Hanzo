@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Image,
   Picker,
-  ScrollView
+  ScrollView,
+  ImageBackground
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import Separator from '../../Components/Separator';
@@ -66,69 +67,71 @@ const RankList = ({ navigation }) => {
     { userName: 'Henry', avatar: 'https://picsum.photos/109', highScore: 208 },
   ])
   return (
-    <SafeAreaView style={[styles.container]}>
-      <StatusBar
-        barStyle="dark-content"
-        hidden={false}
-        backgroundColor="rgb(234, 164, 67)"
-        translucent={true}
-      />
-      <Picker
-        style={{ height: 50, width: "100%" }}
-        onValueChange={(itemValue, itemIndex) => {
-          let customUsers = [];
-          for (let i = 0; i < itemValue; i++) {
-            if (i >= users.length)
-              break;
-            customUsers.push(users[i]);
-          }
-          setFilteredUsers(customUsers);
-          console.log(customUsers.length)
-        }}
-      >
-        <Picker.Item label="Choose number of top users...." value="10" />
-        <Picker.Item label="Number of top users: 10" value="10" />
-        <Picker.Item label="Number of top users: 20" value="20" />
-        <Picker.Item label="Number of top users: 50" value="50" />
-      </Picker>
-      <Text style={{ fontSize: 22 }}>
-        Rank List
-      </Text>
-      <View style={[styles.row]}>
-        <View style={styles.left}>
-          <ScrollView >
-            <FlatList
-              data={filteredUsers}
-              keyExtractor={item => item.id}
-              renderItem={({ item, index }) => (
-                <TouchableOpacity onPress={() => navigation.navigate('RankDetail')}>
-                  <View style={styles.row}>
-                    <View style={styles.left}>
-                      <Text
-                        style={styles.rank}
-                      >
-                        {index + 1}
-                      </Text>
-                      <Image
-                        source={{ uri: item['avatar'] }}
-                        style={styles.avatar}
-                      />
-                      <Text style={styles.label} numberOfLines={1}>
-                        {item['userName']}
+    <ImageBackground source={{ uri: 'https://static.wixstatic.com/media/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.jpg/v1/fill/w_1370,h_3000,al_c,q_90/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.webp' }} style={{ width: "100%", height: "100%" }}>
+      <SafeAreaView style={[styles.container]}>
+        <StatusBar
+          barStyle="dark-content"
+          hidden={false}
+          backgroundColor="rgb(234, 164, 67)"
+          translucent={true}
+        />
+        <Picker
+          style={{ height: 50, width: "100%" }}
+          onValueChange={(itemValue, itemIndex) => {
+            let customUsers = [];
+            for (let i = 0; i < itemValue; i++) {
+              if (i >= users.length)
+                break;
+              customUsers.push(users[i]);
+            }
+            setFilteredUsers(customUsers);
+            console.log(customUsers.length)
+          }}
+        >
+          <Picker.Item label="Choose number of top users...." value="10" />
+          <Picker.Item label="Number of top users: 10" value="10" />
+          <Picker.Item label="Number of top users: 20" value="20" />
+          <Picker.Item label="Number of top users: 50" value="50" />
+        </Picker>
+        <Text style={{ fontSize: 22 }}>
+          Rank List
+        </Text>
+        <View style={[styles.row]}>
+          <View style={styles.left}>
+            <ScrollView >
+              <FlatList
+                data={filteredUsers}
+                keyExtractor={item => item.id}
+                renderItem={({ item, index }) => (
+                  <TouchableOpacity onPress={() => navigation.navigate('RankDetail')}>
+                    <View style={styles.row}>
+                      <View style={styles.left}>
+                        <Text
+                          style={styles.rank}
+                        >
+                          {index + 1}
+                        </Text>
+                        <Image
+                          source={{ uri: item['avatar'] }}
+                          style={styles.avatar}
+                        />
+                        <Text style={styles.label} numberOfLines={1}>
+                          {item['userName']}
+                        </Text>
+                      </View>
+                      <Text style={styles.score}>
+                        {item['highScore'] || 0}
                       </Text>
                     </View>
-                    <Text style={styles.score}>
-                      {item['highScore'] || 0}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              )}
-              ItemSeparatorComponent={() => <Separator />}
-            />
-          </ScrollView>
+                  </TouchableOpacity>
+                )}
+                ItemSeparatorComponent={() => <Separator />}
+              />
+            </ScrollView>
+          </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 

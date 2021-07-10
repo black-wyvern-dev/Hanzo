@@ -1,6 +1,6 @@
 import React from 'react';
 import color from 'color';
-import { Dimensions } from 'react-native';
+import { Dimensions, ImageBackground } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
@@ -47,6 +47,7 @@ export const Notifications = () => {
   );
 
   return (
+    <ImageBackground source={{ uri: 'https://static.wixstatic.com/media/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.jpg/v1/fill/w_1370,h_3000,al_c,q_90/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.webp' }} style={{ width: "100%", height: "100%" }}>
     <React.Fragment>
       <TabView
         navigationState={{ index, routes }}
@@ -56,5 +57,6 @@ export const Notifications = () => {
         renderTabBar={renderTabBar}
       />
     </React.Fragment>
+    </ImageBackground>
   );
 };

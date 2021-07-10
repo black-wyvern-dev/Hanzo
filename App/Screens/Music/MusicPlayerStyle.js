@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flex: 1,
-    backgroundColor: '#EDEDED',
   },
   imageContainer: {
     flex: 0.5,
@@ -51,11 +50,21 @@ const styles = StyleSheet.create({
   songTitle: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: 'rgb(74, 15, 15)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
+    textShadowColor: 'rgba(0,0,0,0.75)',
   },
   artist: {
     fontSize: 14,
+    color: 'rgb(74, 15, 15)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
+    textShadowColor: 'rgba(0,0,0,0.75)',
   },
   playButton: {
+    width: "60%",
+    alignSelf: 'center'
   }
 });
 

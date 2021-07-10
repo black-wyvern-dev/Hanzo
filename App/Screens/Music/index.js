@@ -12,6 +12,8 @@ import MusicList from './MusicList';
 
 import { useGlobals } from '../../contexts/Global';
 import { getMusicList } from '../../apis/update';
+import { Appbar, Avatar, useTheme } from 'react-native-paper';
+import { TouchableOpacity } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +22,7 @@ const MusicPage = ({ navigation }) => {
   const [showAlert, setShowAlert] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState('Unkown Error');
   const [loaded, setLoaded] = React.useState(false);
+  const superNavigation = navigation;
 
   const closeAlert = () => {
     setShowAlert(false);
@@ -63,7 +66,68 @@ const MusicPage = ({ navigation }) => {
 
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator>
+      <Stack.Navigator
+        initialRouteName="MusicList"
+        headerMode="screen"
+        screenOptions={{
+          header: ({ scene, previous, navigation }) => {
+            const { options } = scene.descriptor;
+            const title =
+              options.headerTitle !== undefined
+                ? options.headerTitle
+                : options.title !== undefined
+                  ? options.title
+                  : scene.route.name;
+
+            return (
+              <Appbar.Header
+                style={{
+                  marginTop: 30,
+                  backgroundColor: 'rgb(234, 164, 67)'
+                }}
+              >
+                {title !== 'MusicList' ? (
+                  <Appbar.BackAction
+                    onPress={navigation.goBack}
+                    color={'#4F0F0F'}
+                  />
+                ) : (
+                  <TouchableOpacity
+                    style={{ marginLeft: 10 }}
+                    onPress={() => {
+                      superNavigation.openDrawer();
+                    }}
+                  >
+                    <Icon
+                      name='home'
+                      type='MaterialIcons'
+                      style={{
+                        fontSize: 20,
+                        marginRight: 10,
+                        // color: theme.colors.primary
+                        color: '#4F0F0F',
+                      }}
+                      onPress={() => {
+                        superNavigation.openDrawer();
+                      }}
+                    />
+                  </TouchableOpacity>
+                )}
+                <Appbar.Content
+                  title={title}
+                  titleStyle={{
+                    fontSize: 26,
+                    fontFamily: 'Bradleys Pen',
+                    // color: theme.colors.primary,
+                    color: '#4F0F0F',
+                    alignSelf: 'center',
+                  }}
+                />
+              </Appbar.Header>
+            )
+          }
+        }}
+      >
         <Stack.Screen name="MusicList" component={MusicList}
           options={({ navigation, route }) => ({
             headerLeft: () => (
@@ -75,20 +139,21 @@ const MusicPage = ({ navigation }) => {
                 }}
               />
             ),
-          })} />
+          })}
+        />
         <Stack.Screen name="MusicPlayer" component={MusicPlayer}
           options={({ navigation, route }) => ({
             headerLeft: () => (
               <Icon
-                name='navigate-before'
+                name='home'
                 type='MaterialIcons'
-                style={{ fontSize: 28, marginLeft: 10 }}
+                style={{ fontSize: 20, marginLeft: 10 }}
                 onPress={() => {
-                  navigation.navigate('MusicList');
                 }}
               />
             ),
-          })} />
+          })}
+        />
       </Stack.Navigator>
       <Overlay isVisible={showAlert} onBackdropPress={() => closeAlert()}>
         <Text style={{ margin: 15 }}>{errorMsg}</Text>

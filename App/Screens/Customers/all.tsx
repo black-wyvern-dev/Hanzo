@@ -20,8 +20,8 @@ export const AllNotifications = () => {
 
   return (
     <FlatList
-      contentContainerStyle={{ backgroundColor: theme.colors.background }}
-      style={{ backgroundColor: theme.colors.background }}
+      contentContainerStyle={{ backgroundColor: 'transparent' }}
+      style={{ backgroundColor: 'transparent' }}
       data={notificationTweets}
       renderItem={renderItem}
       keyExtractor={keyExtractor}

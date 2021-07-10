@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   drawerCloseIcon: {
     fontSize: 22,
-    color: '#fff',
+    color: 'rgb(234, 164, 67)',
     position: 'absolute',
     top: 15,
     left: 15,

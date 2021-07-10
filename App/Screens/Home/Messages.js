@@ -8,7 +8,8 @@ import {
     StyleSheet,
     Alert,
     KeyboardAvoidingView,
-    TouchableOpacity
+    TouchableOpacity,
+    ImageBackground
 } from 'react-native';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { AudioRecorder, AudioUtils } from "react-native-audio";
@@ -403,88 +404,90 @@ export default function Messages({ navigation, route }) {
     };
 
     return (
-        <SafeAreaView style={[styles.container]}>
-            <Appbar.Header
-                style={{
-                    marginTop: 30,
-                    backgroundColor: 'rgb(234, 164, 67)',
-                    width: '100%'
-                }}
-            >
-                <Appbar.BackAction
-                    onPress={navigation.goBack}
-                    color={'#4F0F0F'}
-                />
-                <Appbar.Content
-                    title={"Message"}
-                    titleStyle={{
-                        fontSize: 26,
-                        fontFamily: 'Bradleys Pen',
-                        // color: theme.colors.primary,
-                        color: '#4F0F0F',
-                        alignSelf: 'center',
-                    }}
-                />
-                <TouchableOpacity
-                    style={{ marginLeft: 10 }}
-                    onPress={() => {
-                        // superNavigation.openDrawer();
+        <ImageBackground source={{ uri: 'https://static.wixstatic.com/media/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.jpg/v1/fill/w_1370,h_3000,al_c,q_90/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.webp' }} style={{ width: "100%", height: "100%" }}>
+            <SafeAreaView style={[styles.container]}>
+                <Appbar.Header
+                    style={{
+                        marginTop: 30,
+                        backgroundColor: 'rgb(234, 164, 67)',
+                        width: '100%'
                     }}
                 >
-                    <Icon
-                        name='add-a-photo'
-                        type='MaterialIcons'
-                        style={{
-                            fontSize: 20,
-                            marginRight: 10,
-                            // color: theme.colors.primary
-                            color: '#4F0F0F',
-                        }}
-                        onPress={
-                            () => {
-                                // console.log('CreateChatRoom');
-                                handleAddPicture();
-                            }
-                        }
+                    <Appbar.BackAction
+                        onPress={navigation.goBack}
+                        color={'#4F0F0F'}
                     />
-                </TouchableOpacity>
-            </Appbar.Header>
-            <View style={{ width: '100%', flex: 1 }}>
-                {renderAndroidMicrophone()}
-                <GiftedChat
-                    messages={messages}
-                    onSend={handleSend}
-                    renderBubble={renderBubble}
-                    renderActions={() => {
-                        if (Platform.OS === "ios") {
-                            return (
-                                <Ionicons
-                                    name="ios-mic"
-                                    size={35}
-                                    hitSlop={{ top: 20, bottom: 20, left: 50, right: 50 }}
-                                    color={startAudio ? "red" : "black"}
-                                    style={{
-                                        bottom: 50,
-                                        right: Dimensions.get("window").width / 2 - 35,
-                                        position: "absolute",
-                                        shadowColor: "#000",
-                                        shadowOffset: { width: 0, height: 0 },
-                                        shadowOpacity: 0.5,
-                                        zIndex: 2,
-                                        backgroundColor: "transparent"
-                                    }}
-                                    onPress={handleAudio}
-                                />
-                            );
-                        }
-                    }}
-                    user={{
-                        _id: userInfo.id,
-                        name: `${userInfo.firstName} ${userInfo.lastName}`,
-                    }}
-                />
-            </View>
-        </SafeAreaView>
+                    <Appbar.Content
+                        title={"Message"}
+                        titleStyle={{
+                            fontSize: 26,
+                            fontFamily: 'Bradleys Pen',
+                            // color: theme.colors.primary,
+                            color: '#4F0F0F',
+                            alignSelf: 'center',
+                        }}
+                    />
+                    <TouchableOpacity
+                        style={{ marginLeft: 10 }}
+                        onPress={() => {
+                            // superNavigation.openDrawer();
+                        }}
+                    >
+                        <Icon
+                            name='add-a-photo'
+                            type='MaterialIcons'
+                            style={{
+                                fontSize: 20,
+                                marginRight: 10,
+                                // color: theme.colors.primary
+                                color: '#4F0F0F',
+                            }}
+                            onPress={
+                                () => {
+                                    // console.log('CreateChatRoom');
+                                    handleAddPicture();
+                                }
+                            }
+                        />
+                    </TouchableOpacity>
+                </Appbar.Header>
+                <View style={{ width: '100%', flex: 1 }}>
+                    {renderAndroidMicrophone()}
+                    <GiftedChat
+                        messages={messages}
+                        onSend={handleSend}
+                        renderBubble={renderBubble}
+                        renderActions={() => {
+                            if (Platform.OS === "ios") {
+                                return (
+                                    <Ionicons
+                                        name="ios-mic"
+                                        size={35}
+                                        hitSlop={{ top: 20, bottom: 20, left: 50, right: 50 }}
+                                        color={startAudio ? "red" : "black"}
+                                        style={{
+                                            bottom: 50,
+                                            right: Dimensions.get("window").width / 2 - 35,
+                                            position: "absolute",
+                                            shadowColor: "#000",
+                                            shadowOffset: { width: 0, height: 0 },
+                                            shadowOpacity: 0.5,
+                                            zIndex: 2,
+                                            backgroundColor: "transparent"
+                                        }}
+                                        onPress={handleAudio}
+                                    />
+                                );
+                            }
+                        }}
+                        user={{
+                            _id: userInfo.id,
+                            name: `${userInfo.firstName} ${userInfo.lastName}`,
+                        }}
+                    />
+                </View>
+            </SafeAreaView>
+        </ImageBackground>
     )
 }
 

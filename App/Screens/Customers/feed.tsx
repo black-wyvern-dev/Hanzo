@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet, ImageBackground } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useTheme } from 'react-native-paper';
 
@@ -34,9 +34,10 @@ export const Feed = (props: Props) => {
   }));
 
   return (
+    <ImageBackground source={{ uri: 'https://static.wixstatic.com/media/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.jpg/v1/fill/w_1370,h_3000,al_c,q_90/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.webp' }} style={{ width: "100%", height: "100%" }}>
     <FlatList
-      contentContainerStyle={{ backgroundColor: theme.colors.background }}
-      style={{ backgroundColor: theme.colors.background }}
+      contentContainerStyle={{ backgroundColor: 'transparent' }}
+      style={{ backgroundColor: 'transparent' }}
       data={data}
       renderItem={renderItem}
       keyExtractor={keyExtractor}
@@ -44,5 +45,6 @@ export const Feed = (props: Props) => {
         <View style={{ height: StyleSheet.hairlineWidth }} />
       )}
     />
+    </ImageBackground>
   );
 };

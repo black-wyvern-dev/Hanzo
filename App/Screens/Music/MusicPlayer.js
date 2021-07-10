@@ -4,34 +4,19 @@ import {
   StatusBar,
   View,
   Image,
-  TouchableOpacity,
-  Button,
+  ImageBackground
 } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 
 import TrackPlayer from 'react-native-track-player';
 import { useTrackPlayerProgress } from 'react-native-track-player/lib/hooks';
 import Slider from '@react-native-community/slider';
-import { useTheme } from 'react-native-paper';
+import { useTheme, Button } from 'react-native-paper';
 import { useTrackPlayerEvents } from 'react-native-track-player/lib/hooks';
 import { TrackPlayerEvents, STATE_PLAYING } from 'react-native-track-player';
 
 import styles from './MusicPlayerStyle';
 
-// import { useGlobals } from '../../contexts/Global';
-
-// const music ={
-//    id: '1',
-//    url:
-//      'https://audio-previews.elements.envatousercontent.com/files/103682271/preview.mp3',
-//    type: 'default',
-//    title: 'My Title',
-//    album: 'My Album',
-//    artist: 'Rohan Bhatia',
-//    artwork: 'https://picsum.photos/100',
-// }
-
-//function to initialize the Track Player 
 const trackPlayerInit = async (music) => {
   await TrackPlayer.setupPlayer();
   await TrackPlayer.add(music);
@@ -105,51 +90,56 @@ const MusicPlayer = ({ navigation, route }) => {
   };
 
   return (
-    <SafeAreaView style={[styles.container]}>
-      <StatusBar
-        barStyle="dark-content"
-        hidden={false}
-        backgroundColor="rgb(234, 164, 67)"
-        translucent={true}
-      />
-      <View style={[styles.inputContainer, { flex: 1, width: '100%' }]}>
-        <View style={styles.mainContainer}>
-          <View style={styles.imageContainer}>
-            <Image
-              source={{
-                uri: music.artwork,
-              }}
-              resizeMode="contain"
-              style={styles.albumImage}
-            />
-          </View>
-          <View style={styles.detailsContainer}>
-            <Text style={styles.songTitle}>{music.title}</Text>
-            <Text style={styles.artist}>{music.artist}</Text>
-          </View>
-          <View style={styles.controlsContainer}>
-            <Slider
-              style={styles.progressBar}
-              minimumValue={0}
-              maximumValue={1}
-              value={sliderValue}
-              minimumTrackTintColor="#111000"
-              maximumTrackTintColor="#000000"
-              onSlidingStart={slidingStarted}
-              onSlidingComplete={slidingCompleted}
-              thumbTintColor="#000"
-            />
-            <Button
-              title={isPlaying ? 'Pause' : 'Play'}
-              onPress={onButtonPressed}
-              style={styles.playButton}
-              disabled={!isTrackPlayerInit}
-              color="#000000"
-            />
+    <ImageBackground source={{ uri: 'https://static.wixstatic.com/media/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.jpg/v1/fill/w_1370,h_3000,al_c,q_90/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.webp' }} style={{ width: "100%", height: "100%" }}>
+      <SafeAreaView style={[styles.container]}>
+        <StatusBar
+          barStyle="dark-content"
+          hidden={false}
+          backgroundColor="rgb(234, 164, 67)"
+          translucent={true}
+        />
+        <View style={[styles.inputContainer, { flex: 1, width: '100%' }]}>
+          <View style={styles.mainContainer}>
+            <View style={styles.imageContainer}>
+              <Image
+                source={{
+                  uri: music.artwork,
+                }}
+                resizeMode="contain"
+                style={styles.albumImage}
+              />
+            </View>
+            <View style={styles.detailsContainer}>
+              <Text style={styles.songTitle}>{music.title}</Text>
+              <Text style={styles.artist}>{music.artist}</Text>
+            </View>
+            <View style={styles.controlsContainer}>
+              <Slider
+                style={styles.progressBar}
+                minimumValue={0}
+                maximumValue={1}
+                value={sliderValue}
+                minimumTrackTintColor="rgb(74, 15, 15)"
+                maximumTrackTintColor="#EAA443"
+                onSlidingStart={slidingStarted}
+                onSlidingComplete={slidingCompleted}
+                thumbTintColor="rgb(74, 15, 15)"
+              />
+              <Button
+                onPress={onButtonPressed}
+                style={styles.playButton}
+                disabled={!isTrackPlayerInit}
+                labelStyle={{ color: 'rgb(74, 15, 15)' }}
+                color="#EAA443"
+                mode="contained"
+              >
+                {isPlaying ? 'Pause' : 'Play'}
+              </Button>
+            </View>
           </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 

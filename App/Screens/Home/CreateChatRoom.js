@@ -5,9 +5,9 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  Button,
+  ImageBackground
 } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { useTheme, Button, } from 'react-native-paper';
 import SafeAreaView from 'react-native-safe-area-view';
 import styles from './HomeStyle';
 import firestore from '@react-native-firebase/firestore';
@@ -44,26 +44,34 @@ const CreateChatRoom = ({ navigation }) => {
   };
 
   return (
-
-    <SafeAreaView style={[styles.container]}>
-      <StatusBar
-        barStyle="dark-content"
-        hidden={false}
-        backgroundColor="rgb(234, 164, 67)"
-        translucent={true}
-      />
-      <View style={[styles.inputContainer, { flex: 1, width: '100%' }]}>
-        <TextInput
-          style={[styles.input]}
-          onChangeText={setRoomName}
-          placeholder="New room id"
-          value={roomName}
+    <ImageBackground source={{ uri: 'https://static.wixstatic.com/media/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.jpg/v1/fill/w_1370,h_3000,al_c,q_90/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.webp' }} style={{ width: "100%", height: "100%" }}>
+      <SafeAreaView style={[styles.container]}>
+        <StatusBar
+          barStyle="dark-content"
+          hidden={false}
+          backgroundColor="rgb(234, 164, 67)"
+          translucent={true}
         />
-        <TouchableOpacity >
-          <Button style={[{ textAlign: 'center' }]} onPress={handleButtonPress} title={'Create Chatroom'} />
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+        <View style={[styles.inputContainer, { flex: 1, width: '100%' }]}>
+          <TextInput
+            style={styles.input}
+            onChangeText={setRoomName}
+            placeholder="New room id"
+            value={roomName}
+          />
+          <TouchableOpacity >
+            <Button
+              style={[{ textAlign: 'center', width: '60%', alignSelf: 'center' }]}
+              onPress={handleButtonPress}
+              labelStyle={{ color: 'rgb(74, 15, 15)' }}
+              color="#EAA443"
+              mode="contained">
+              Create Chatroom
+            </Button>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import color from 'color';
+import {ImageBackground} from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { useTheme, Portal, FAB } from 'react-native-paper';
 import { useSafeArea } from 'react-native-safe-area-context';
@@ -45,12 +46,14 @@ export const BottomTabs = (props: Props) => {
     : theme.colors.surface;
 
   return (
+    // <ImageBackground source={{ uri: 'https://static.wixstatic.com/media/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.jpg/v1/fill/w_1370,h_3000,al_c,q_90/caf856_dfbf5ef9517d41c7abe3dd4e1db08796~mv2.webp' }} style={{ width: "100%", height: "100%" }}>
+
     <React.Fragment>
       <Tab.Navigator
         initialRouteName="Feed"
         backBehavior="initialRoute"
         shifting={true}
-        activeColor={theme.colors.primary}
+        activeColor={'rgb(74, 15, 15)'}
         inactiveColor={color(theme.colors.text)
           .alpha(0.6)
           .rgb()
@@ -62,7 +65,7 @@ export const BottomTabs = (props: Props) => {
           component={Feed}
           options={{
             tabBarIcon: 'bell-outline',
-            tabBarColor,
+            tabBarColor: '#EAA443',
           }}
         />
         <Tab.Screen
@@ -70,7 +73,7 @@ export const BottomTabs = (props: Props) => {
           component={Notifications}
           options={{
             tabBarIcon: 'bell-alert-outline',
-            tabBarColor,
+            tabBarColor: '#EAA443',
           }}
         />
         {
@@ -80,7 +83,7 @@ export const BottomTabs = (props: Props) => {
             component={Message}
             options={{
               tabBarIcon: 'message-text-outline',
-              tabBarColor,
+              tabBarColor: '#EAA443'
             }}
           />
           : <></>
@@ -105,5 +108,7 @@ export const BottomTabs = (props: Props) => {
         />
       </Portal>
     </React.Fragment>
+    // </ImageBackground>
+
   );
 };
